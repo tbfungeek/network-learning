@@ -15,3 +15,18 @@
 - [图解浏览器的基本工作原理](https://zhuanlan.zhihu.com/p/47407398)
 - [浏览器的工作原理](https://github.com/creeperyang/blog/issues/46)
 - [深入浅出浏览器渲染原理](https://blog.fundebug.com/2019/01/03/understand-browser-rendering/)
+
+
+#### HTTP、HTTPS、SPDY、HTTP2
+
+- [HTTP 的前世今生：一次性搞懂 HTTP、HTTPS、SPDY、HTTP2](https://juejin.im/post/5be935f2e51d4570813b8cf0)
+
+
+#### 浏览器原理
+
+- [浏览器工作原理-webkit内核研究](https://juejin.im/entry/5a9a379af265da239d48c027)
+- [深入剖析 WebKit](https://ming1016.github.io/2017/10/11/deeply-analyse-webkit/)
+
+#### 网络分层
+
+![](./images/network_layer.jpg)
