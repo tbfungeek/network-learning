@@ -137,10 +137,13 @@ DNS服务器内部有一张表专门用来存储这些映射关系，那么这�
 三次握手的作用就是在进行数据传输之前让双方都能明确自己和对方的收、发能力是正常的。
 
 ![](./images/3_time_shake.jpeg)
+![](./images/3_time_shake_1.jpeg)
 
 ##### 四次挥手
 
 ![](./images/4_time_wave.jpeg)
+![](./images/4_time_wave_1.jpeg)
+
 
 
 #### 传输包的封装。解封装
