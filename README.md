@@ -138,6 +138,12 @@ DNS服务器内部有一张表专门用来存储这些映射关系，那么这�
 ![](./images/TCP-IP-package.png)
 
 
+#### 数据包的传输
+
+![](./images/how-data-is-processed-in-OSI-and-TCPIP-models.png)
+![](./images/Internet_package.png)
+
+
 #### 传输层协议
 
 #### TCP协议的特点
@@ -278,7 +284,7 @@ SYN攻击就是客户端在短时间内伪造大量不存在的IP地址，并向
   UDP的头部开销小，只有8字节，相比TCP的至少二十字节要少得多，在传输数据报文时是很高效的
 
 - ****UDP是面向报文的****
-- 
+
 - ****支持单播，多播，广播的功能****
 
 #### UDP帧格式
@@ -303,12 +309,6 @@ UDP报文头长度是8个字节
 ****TCP UDP 常用端口号****:
 
 ![](./images/tcp_udp_common_port.jpg)
-
-
-#### 数据包的传输
-
-![](./images/how-data-is-processed-in-OSI-and-TCPIP-models.png)
-![](./images/Internet_package.png)
 
 #### HTTP、HTTPS、SPDY、HTTP2
 
