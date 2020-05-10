@@ -221,6 +221,34 @@ SYN攻击就是客户端在短时间内伪造大量不存在的IP地址，并向
 ![](./images/TCP-IP-package.png)
 
 
+#### TCP帧格式
+
+不携带选项(option)的TCP头长为20bytes，携带选项的TCP头最长可到60bytes。
+
+![](./images/tcp_package_format.png)
+
+****TCP各字段意义****:
+
+- 源端口(Source Port)：16位的源端口表示发送方应用程序对应的端口。
+- 目的端口(Destination port)：16位的目的端口域用来指明报文接收计算机上的应用程序地址接口。
+- 序列号（SequenceNumber）：32位的序列号标识了TCP报文中第一个byte在对应方向的传输中对应的字节序号。通过序列号，TCP接收端可以识别出重复接收到的TCP包，从而丢弃重复包，同时对于乱序数据包也可以依靠系列号进行重排序，进而对高层提供有序的数据流。简而言之就是用于去重和排序。
+- 应答号(Acknowledgment Number)：32位的ACK Number标识了报文发送端期望接收的字节序列。如果设置了ACK控制位，这个值表示一个准备接收的包的序列码，注意是准备接收的包，比如当前接收端接收到一个净荷为12byte的数据包，SN为5，则会回复一个确认收到的数据包，如果这个数据包之前的数据也都已经收到了，这个数据包中的ACK Number则设置为12+5=17，表示之前的数据都已经收到了，准备接受SN=17的数据包。
+- 头长(Header Length)：4位包括TCP头大小，指示TCP头的长度，即数据从何处开始。
+- 保留(Reserved)位：4位值域，这些位必须是0。
+- 标志(Code Bits)位：8位标志位
+  - CWR(Congestion Window Reduce)：拥塞窗口减少标志，用来表明它接收到了设置ECE标志的TCP包。并且发送端在收到消息之后已经通过降低发送窗口的大小来降低发送速率。
+  - ECE(ECN Echo)：ECN响应标志被用来在TCP3次握手时表明一个TCP端是具备ECN功能的。在数据传输过程中也用来表明接收到的TCP包的IP头部的ECN被设置为11。
+  - URG(Urgent)：该标志位置位表示紧急(The urgent pointer) 标志有效。
+  - ACK：取值1代表Acknowledgment Number字段有效，这是一个确认的TCP包，取值0则不是确认包。
+  - PSH(Push)：该标志置位时，一般是表示发送端缓存中已经没有待发送的数据，接收端不将该数据进行队列处理，而是尽可能快将数据转由应用处理。
+  - RST(Reset)：用于reset相应的TCP连接。通常在发生异常或者错误的时候会触发复位TCP连接。
+  - SYN：同步序列编号(Synchronize Sequence Numbers)有效。该标志仅在三次握手建立TCP连接时有效。
+  - FIN(Finish)：表示发送方没有数据要传输了。
+- 窗口大小(Window Size)：16位，该值指示了从Ack Number开始还愿意接收多少byte的数据量，也即用来表示当前接收端的接收窗还有多少剩余空间，用于TCP的流量控制。
+- 校验位(Checksum)：16位TCP头。发送端基于数据内容计算一个数值，接收端要与发送端数值结果完全一样，才能证明数据的有效性。接收端checksum校验失败的时候会直接丢掉这个数据包。CheckSum是根据伪头+TCP头+TCP数据三部分进行计算的。
+- 紧急数据指针（Urgent Pointer）：16位，指向后面是优先数据的字节，在URG标志设置了时才有效。如果URG标志没有被设置，紧急域作为填充。
+- 选项(Option)：长度不定，但长度必须以是32bits的整数倍。常见的选项包括MSS、SACK、Timestamp等等。
+
 #### 数据包的传输
 
 ![](./images/how-data-is-processed-in-OSI-and-TCPIP-models.png)
