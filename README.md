@@ -251,7 +251,7 @@ SYN攻击就是客户端在短时间内伪造大量不存在的IP地址，并向
 
 UDP报文头长度是8个字节
 
-![](./images/udp_frame.jpg)
+![](./images/udp_frame.png)
 
 ****UDP各字段意义****:
 
