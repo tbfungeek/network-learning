@@ -1,7 +1,5 @@
 # 计算机网络
 
-![](./images/header.jpg)
-
 ### 浏览器工作原理
 
 ![](./images/what_do_i_do_when_type_url.jpg)
