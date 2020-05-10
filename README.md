@@ -1,4 +1,6 @@
-# 网络技术
+# 计算机网络
+
+![](./images/header.jpg)
 
 ### 浏览器工作原理
 
@@ -226,6 +228,11 @@ SYN攻击就是客户端在短时间内伪造大量不存在的IP地址，并向
 
 - [浏览器工作原理-webkit内核研究](https://juejin.im/entry/5a9a379af265da239d48c027)
 - [深入剖析 WebKit](https://ming1016.github.io/2017/10/11/deeply-analyse-webkit/)
+
+
+
+
+http://c.biancheng.net/tcp_ip/
 
 
 
