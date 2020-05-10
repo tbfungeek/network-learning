@@ -123,9 +123,9 @@ DNS服务器内部有一张表专门用来存储这些映射关系，那么这�
 
 ![](./images/OSI.png)
 ![](./images/OSI_Layer.png)
+![](./images/layer_comm.png)
 
 下面是YouTobe上找到的一个比较好的视频[『初探資訊』OSI 網路通訊架構](https://www.youtube.com/watch?v=kyARqyCjoYY)
-
 
 ##### OSI七层网络模型与TCP/IP 四层网络结构对应关系
 
@@ -259,6 +259,11 @@ UDP报文头长度是8个字节
 - ****目的端口****：接收端计算机上 UDP 数据使用的端口，占据 16 位。
 - ****长度****：该字段占据 16 位，表示 UDP 数据报长度，包含UDP报文头和UDP数据长度。
 - ****校验值****：该字段占据 16 位，可以检验数据在传输过程中是否被损坏。
+
+****TCP UDP 常用端口号****:
+
+![](./images/tcp_udp_common_port.jpg)
+
 
 #### 数据包的传输
 
