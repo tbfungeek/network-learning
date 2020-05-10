@@ -274,6 +274,7 @@ UDP报文头长度是8个字节
 #### TCP 和 UDP帧的区别
 
 ![](./images/TCP_vs_UDP.jpeg)
+![](./images/tcp-vs-udp.svg)
 ![](./images/tcp_vs_udp.png)
 
 ****TCP UDP 常用端口号****:
