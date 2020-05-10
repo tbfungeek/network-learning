@@ -124,6 +124,7 @@ DNS服务器内部有一张表专门用来存储这些映射关系，那么这�
 　应用层的功能是直接向用户提供某项服务，完成用户希望在网络上完成的各种工作。
 
 ![](./images/OSI.png)
+![](./images/OSI_Layer.png)
 
 下面是YouTobe上找到的一个比较好的视频[『初探資訊』OSI 網路通訊架構](https://www.youtube.com/watch?v=kyARqyCjoYY)
 
