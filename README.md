@@ -251,7 +251,7 @@ SYN攻击就是客户端在短时间内伪造大量不存在的IP地址，并向
 
 UDP报文头长度是8个字节
 
-![](./images/udp_frame.png)
+![](./images/udp_frame.jpg)
 
 ****UDP各字段意义****:
 
@@ -259,6 +259,11 @@ UDP报文头长度是8个字节
 - ****目的端口****：接收端计算机上 UDP 数据使用的端口，占据 16 位。
 - ****长度****：该字段占据 16 位，表示 UDP 数据报长度，包含UDP报文头和UDP数据长度。
 - ****校验值****：该字段占据 16 位，可以检验数据在传输过程中是否被损坏。
+
+#### TCP 和 UDP帧的区别
+
+![](./images/TCP_vs_UDP.jpeg)
+![](./images/tcp_vs_udp.png)
 
 ****TCP UDP 常用端口号****:
 
@@ -284,6 +289,7 @@ UDP报文头长度是8个字节
 
 
 http://c.biancheng.net/tcp_ip/
+https://microchipdeveloper.com/networking:start
 
 
 
