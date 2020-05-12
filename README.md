@@ -373,6 +373,13 @@ TCP是个字节流协议，是没有界限的一串数据。TCP底层并不了�
 
   可用窗口大小就等于SND.WND -（SND.NXT – SND.UNA）：
 
+  接下来我们以动态的视角看下整个窗口滑动的效果：
+  ![](./images/slice_window.png)
+  ![](./images/slice.jpg)
+
+  
+
+
   推荐文章：
   - [TCP协议的滑动窗口具体是怎样控制流量的？](https://www.zhihu.com/question/32255109)
   - [你还在为 TCP 重传、滑动窗口、流量控制、拥塞控制发愁吗？看完图解就不愁了](https://www.javashitang.com/?p=577)
