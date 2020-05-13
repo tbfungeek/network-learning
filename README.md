@@ -542,7 +542,7 @@ Fast Retransmit只解决了一个问题，就是timeout的问题，它依然面�
 前面的问题的关键在于无法确认非连续片段。要解决这个问题必须添加允许设备分别确认非连续片段的功能。这一功能称为选择确认（selective acknowledgment, SACK）。
 如果要使用这个功能必须连接的两方设备同时支持这一功能，这个确定过程在连接的时候通过SYN片段来协商是否允许使用SACK。如果该片段已被选择确认过，则该片段中的SACK比特位置为1。该设备使用图2中激进方式的改进版本，一个片段重传之后，之后所有SACK比特位非1的片段都会被重传。
 
-![](./IMAGES/tcp_sack_example-1024x577.jpg)
+![](./images/tcp_sack_example-1024x577.jpg)
 
 Duplicate SACK – 重复收到数据的问题
 
