@@ -144,7 +144,7 @@ DNS服务器内部有一张表专门用来存储这些映射关系，那么这�
 ![](./images/Internet_package.png)
 
 
-#### 传输层协议
+#### 传输层协议 - 如何在两个应用直接可靠传输
 
 #### TCP协议的特点
 
@@ -562,6 +562,27 @@ D-SACK使用了SACK的第一个段来做标志，
   - [这一次,让我们再深入一点 - TCP协议](https://juejin.im/post/5a49d95af265da430a50ed8c)
   - [TCP 进阶](https://juejin.im/post/5a49d95af265da430a50ed8c)
   - [TCP协议 读后感](https://www.todayios.com/impression-of-tcp-in-geekbang/)
+  - [一篇文章带你熟悉 TCP/IP 协议（网络协议篇二）](https://juejin.im/post/5a069b6d51882509e5432656)
+  - [一篇文章带你详解 HTTP 协议（网络协议篇一）](https://www.jianshu.com/p/6e9e4156ece3)
+  - [网络编程懒人入门](https://yq.aliyun.com/articles/670062?spm=a2c4e.11153940.0.0.72e87584UZ2aDo)
+  - 
+#### IP协议 - 如何找到最合适的路径将数据送到
+
+要标示一个应用和另一个应用的连接，会涉及到MAC地址，IP地址及端口。其中MAC地址具有设备唯一性，是物理地址，而IP地址是逻辑上的地址，一台机器有一个IP地址，但是一台主机上可能有多个应用所以，要标示某台机器上的某个应用就需要借助于端口，每个设备会为需要的应用分配单独的端口。接下来会重点从如下几个方面介绍IP协议相关的内容：
+
+- ****IP地址MAC地址及端口划分**** :介绍IP地址的组成，IP头的组成，MAC地址相关，以及应用端口分配
+- ****IP 相关技术**** : 介绍DNS，ARP，DHCP等和IP协议相关的技术。
+- ****路由过程**** : 介绍一个包怎么从一个应用送往另一个应用。
+
+##### IP地址MAC地址及端口划分
+
+##### IP 相关技术
+
+##### 路由过程
+
+- ****推荐文章****
+
+- [IP协议相关技术--图解TCP/IP](https://blog.csdn.net/sinat_37138973/article/details/72767558)
 
 #### HTTP、HTTPS、SPDY、HTTP2
 
