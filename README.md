@@ -597,6 +597,18 @@ D-SACK使用了SACK的第一个段来做标志，
 
 - ****ICMP****
 
+ICMP(互联网控制消息协议（Internal Control Message Protocol）)，与IP协议一样同属TCP/IP模型中的网络层，并且ICMP数据包是包裹在IP数据包中的,它的作用是报告一些网络传输过程中的错误以及做一些同步工作。ICMP数据包有许多类型。每一个数据包只有前4个字节是相同域的，剩余的字段有不同的数据包类型的不同而不同。
+
+![](./images/icmp.png)
+
+类型字段：指明该数据包属于什么类型（大分类），长度1个字节。
+代码字段：指明数据包属于大类里面的哪个小类，长度1个字节。类型字段与代码字段共同决定ICMP数据包类型，以及后续字段含义。
+校验和： 指明该数据包的校验和，长度2个字节。该校验和覆盖整个ICMP数据包。
+
+![](./images/icmp_code.png)
+
+![](./images/icmp_image.png)
+
 - ****DHCP****
 
 - ****NAT****
@@ -635,4 +647,6 @@ D-SACK使用了SACK的第一个段来做标志，
 
 - [浏览器工作原理-webkit内核研究](https://juejin.im/entry/5a9a379af265da239d48c027)
 - [深入剖析 WebKit](https://ming1016.github.io/2017/10/11/deeply-analyse-webkit/)
-
+- [「一道面试题」输入URL到渲染全面梳理上-网络通信篇](https://juejin.im/post/5e9c48b2f265da47c558566b)
+- [「一道面试题」输入URL到渲染全面梳理中-页面渲染篇](https://juejin.im/post/5e9f1db86fb9a03c85463560)
+- [「一道面试题」输入URL到渲染全面梳理下-总结篇](https://juejin.im/post/5ebabbf96fb9a043586c8f9e)
