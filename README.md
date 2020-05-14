@@ -574,15 +574,18 @@ D-SACK使用了SACK的第一个段来做标志，
 - ****IP 相关技术**** : 介绍DNS，ARP，DHCP等和IP协议相关的技术。
 - ****路由过程**** : 介绍一个包怎么从一个应用送往另一个应用。
 
-##### IP地址MAC地址及端口划分
-
 ##### IP 相关技术
+
+##### IP地址MAC地址及端口划分
 
 ##### 路由过程
 
 - ****推荐文章****
 
 - [IP协议相关技术--图解TCP/IP](https://blog.csdn.net/sinat_37138973/article/details/72767558)
+- [IP地址](https://juejin.im/post/5c8e3e426fb9a070ab7e1a73)
+- [一文看懂IP地址：含义、分类、子网划分、查与改、路由器与IP地址](https://network.51cto.com/art/201911/605681.htm)
+- [网络编程懒人入门(十一)：一文读懂什么是IPv6](https://zhuanlan.zhihu.com/p/132411396)
 
 #### HTTP、HTTPS、SPDY、HTTP2
 
