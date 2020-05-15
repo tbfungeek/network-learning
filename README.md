@@ -646,6 +646,10 @@ NAT最初的发展是为了解决IPv4地址短缺而流行起来的。NAT在家�
 ![](./images/static-nat.jpg)
   
 - ****IP隧道****
+  
+IP隧道技术是路由器把一种网络层协议封装到另一个协议中以跨过网络传送到另一个路由器的处理过程，发送路由器将被传送的协议包进行封装，经过网络传送，接受路由器解开收到的包，取出原始协议，而在传输过程中的中间路由器并不在意封装的协议是什么。隧道技术是一种点对点的链接，因而必须在链接的两端配置隧道协议。
+
+![](./images/pp.jpg)
 
 ##### IP地址MAC地址及端口划分
 
@@ -661,6 +665,7 @@ NAT最初的发展是为了解决IPv4地址短缺而流行起来的。NAT在家�
 - [ICMP协议详解](https://blog.csdn.net/baidu_37964071/article/details/80514340)
 - [协议森林06 瑞士军刀 (ICMP协议)](https://www.cnblogs.com/vamei/archive/2012/12/05/2801991.html)
 - [DHCP协议原理及其实现流程](https://blog.csdn.net/wuruixn/article/details/8282554)
+- [IP 隧道技术：基础篇](https://blog.csdn.net/bat603/article/details/779842)
 
 #### 应用层协议
 
