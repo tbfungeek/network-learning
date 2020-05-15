@@ -651,6 +651,12 @@ IP隧道技术是路由器把一种网络层协议封装到另一个协议中以
 
 ![](./images/pp.jpg)
 
+下面是两个关于VPN/L2TP/IPSec/PPTP的介绍视频：
+
+- [L2TP/IPSec VPN Protocol vs PPTP - Which One Is Best?](https://www.youtube.com/watch?v=5pCYnFNxugE)
+
+- [What is a VPN and How Does it Work?](https://www.youtube.com/watch?v=_wQTRMBAvzg)
+
 ##### IP地址MAC地址及端口划分
 
 ##### 路由过程
