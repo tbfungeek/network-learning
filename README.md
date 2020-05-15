@@ -651,13 +651,23 @@ IP隧道技术是路由器把一种网络层协议封装到另一个协议中以
 
 ![](./images/pp.jpg)
 
-下面是两个关于VPN/L2TP/IPSec/PPTP的介绍视频：
+下面是关于VPN/L2TP/IPSec/PPTP的介绍视频：
 
 - [L2TP/IPSec VPN Protocol vs PPTP - Which One Is Best?](https://www.youtube.com/watch?v=5pCYnFNxugE)
 
 - [What is a VPN and How Does it Work?](https://www.youtube.com/watch?v=_wQTRMBAvzg)
 
+- [VPN翻墙到底是什么原理？](https://www.youtube.com/watch?v=ZT-q6mJ-e3g)
+
 ##### IP地址MAC地址及端口划分
+
+##### IPv4 地址结构 
+
+##### IPv6 地址结构 
+
+##### IP帧结构
+
+##### 从宏观看IP帧，TCP/UDP帧，MAC地址，端口在数据通信过程中的作用：
 
 ##### 路由过程
 
@@ -677,7 +687,9 @@ IP隧道技术是路由器把一种网络层协议封装到另一个协议中以
 
 - [HTTP 的前世今生：一次性搞懂 HTTP、HTTPS、SPDY、HTTP2](https://juejin.im/post/5be935f2e51d4570813b8cf0)
 
-##### HTTP、HTTPS、SPDY、HTTP2
+##### HTTP、HTTPS、HTTP2, SPDY、QUIC
+
+##### GraphQL/REST 
 
 ##### 音视频相关协议
 
