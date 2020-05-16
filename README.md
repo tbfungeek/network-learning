@@ -711,23 +711,42 @@ IPv4使用32位4字节地址,理论上整个地址空间可容纳2^32^（约43�
 
 #### 应用层协议
 
-- [HTTP 的前世今生：一次性搞懂 HTTP、HTTPS、SPDY、HTTP2](https://juejin.im/post/5be935f2e51d4570813b8cf0)
-
 ##### HTTP、HTTPS、HTTP2, SPDY、QUIC
 
-##### GraphQL/REST 
+##### SSL/TLS
 
-##### 音视频相关协议
+##### Nginx
+
+##### CDN
 
 ##### WebSocket
 
+##### 音视频相关协议
+
+##### GraphQL/REST 
+
+##### 网络上的硬件设备简介
+
+- 中继器
+- 集线器
+- 网关
+- 网桥
+- 路由器
+- 交换器 
+- 调制解调器
 
 #### 网络安全
 
+#### 网络缓存技术
+
+#### 网站架构
+
 #### 浏览器原理
+
 
 - [浏览器工作原理-webkit内核研究](https://juejin.im/entry/5a9a379af265da239d48c027)
 - [深入剖析 WebKit](https://ming1016.github.io/2017/10/11/deeply-analyse-webkit/)
 - [「一道面试题」输入URL到渲染全面梳理上-网络通信篇](https://juejin.im/post/5e9c48b2f265da47c558566b)
 - [「一道面试题」输入URL到渲染全面梳理中-页面渲染篇](https://juejin.im/post/5e9f1db86fb9a03c85463560)
 - [「一道面试题」输入URL到渲染全面梳理下-总结篇](https://juejin.im/post/5ebabbf96fb9a043586c8f9e)
+- [HTTP 的前世今生：一次性搞懂 HTTP、HTTPS、SPDY、HTTP2](https://juejin.im/post/5be935f2e51d4570813b8cf0)
