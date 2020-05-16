@@ -850,8 +850,9 @@ _双冒号法_：
   Protocol用来说明IP包Payload部分所遵循的协议，也就是IP包之上的协议是什么。它说明了IP包封装的是一个怎样的高层协议包(TCP 还是 UDP)。
 
 3. ****IPv6中删除的区域****：
+
   IPv4和IPv6的长度信息：
-  
+
   IPv4头部的长度，不考虑options的话，整个IPv4头部有20 bytes，有options的存在，整个头部的总长度是变动的。我们用IHL(Internet Header Length)来记录头部的总长度，用Total Length记录整个IP包的长度。IPv6没有options，它的头部是固定的长度40 bytes，所以IPv6中并不需要IHL区域。Payload Length用来表示IPv6的数据部分的长度。整个IP包为40 bytes + Payload Length。
   
   IPv4中还有一个Checksum区域。这个checksum用于校验IP包的头部信息。IPv6则没有checksum区域。IPv6包的校验依赖高层的协议来完成
@@ -860,6 +861,8 @@ _双冒号法_：
 
 3. ****IPv6新增区域****：
   ****Flow Label**** 是IPv6中新增的区域。它被用来提醒路由器来重复使用之前的接力路径。这样IP包可以自动保持出发时的顺序。这对于流媒体之类的应用有帮助。Flow label的进一步使用还在开发中。IPv6中的Flow Label可以建议路由器将一些IP包保持一样的接力路径。但这只是“建议”，路由器可能会忽略该建议。
+  https://blog.csdn.net/u011784495/article/details/71693296
+
 
 ##### 从宏观看IP帧，TCP/UDP帧，MAC地址，端口在数据通信过程中的作用：
 
