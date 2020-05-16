@@ -750,8 +750,10 @@ _双冒号法_：
 
 ![](./images/ipv6_address.png)
 
-
 ##### IP帧结构
+
+![](./images/ipv4-ipv6-620x349.gif)
+
 
 ##### 从宏观看IP帧，TCP/UDP帧，MAC地址，端口在数据通信过程中的作用：
 
