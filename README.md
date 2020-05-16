@@ -812,6 +812,27 @@ _双冒号法_：
 
 ****总的来说IPV4的头包含了头部的长度，整个IP报文的长度，报文的id，以及在用户数据段中的偏移，要交给传输层的哪个协议，源地址/目的地址，生存时间。****
 
+****IP6****
+
+- ****Version****：此字段与IPv4的报文格式相同，4代表IPv4,6代表IPv6；
+
+- ****Traffic Class****：流量区分，与IPv4中的服务类型类似；
+
+- ****Flow Label****：流标签，用来表示数据包的一个流；
+
+- ****Payload Length****：载荷长度；
+
+- ****Next Header****：下一报文头，用来标识IPv6扩展报文头的信息；
+
+- ****Hop Limit****：跳数限制，与IPv4中的TTL类似；
+
+- ****Source Address****：源IP地址；
+
+- ****Destination Address****：目的IP地址；
+
+- ****Extension Headers****：扩展报文头信息。
+
+关于IPV4和IPV6的区别这里有一篇文章介绍得很详细推荐给大家看下：[IPV4和IPV6的区别有哪些](https://zhuanlan.zhihu.com/p/50747832?utm_source=wechat_session&utm_medium=social&utm_oi=37388499812352)
 
 ##### 从宏观看IP帧，TCP/UDP帧，MAC地址，端口在数据通信过程中的作用：
 
