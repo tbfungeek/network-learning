@@ -851,17 +851,16 @@ _双冒号法_：
 
 3. ****IPv6中删除的区域****：
 
-  IPv4和IPv6的长度信息：
-
-  IPv4头部的长度，不考虑options的话，整个IPv4头部有20 bytes，有options的存在，整个头部的总长度是变动的。我们用IHL(Internet Header Length)来记录头部的总长度，用Total Length记录整个IP包的长度。IPv6没有options，它的头部是固定的长度40 bytes，所以IPv6中并不需要IHL区域。Payload Length用来表示IPv6的数据部分的长度。整个IP包为40 bytes + Payload Length。
-  
-  IPv4中还有一个Checksum区域。这个checksum用于校验IP包的头部信息。IPv6则没有checksum区域。IPv6包的校验依赖高层的协议来完成
-  
-  Identification, flags和fragment offset，这三个包都是为碎片化服务的。碎片化是指一个路由器将接收到的IP包分拆成多个IP包传送，而接收这些“碎片”的路由器或者主机需要将“碎片”重新组合成一个IP包。不同的局域网所支持的最大传输单元(MTU, Maximum Transportation Unit)不同。如果一个IP包的大小超过了局域网支持的MTU，就需要在进入该局域网时碎片化传输。碎片化会给路由器和网络带来很大的负担。最好在IP包发出之前探测整个路径上的最小MTU，IP包的大小不超过该最小MTU，就可以避免碎片化。IPv6在设计上避免碎片化。每一个IPv6局域网的MTU都必须大于等于1280bytes。IPv6的默认发送IP包大小为1280bytes。
+    IPv4和IPv6的长度信息：
+    IPv4头部的长度，不考虑options的话，整个IPv4头部有20 bytes，有options的存在，整个头部的总长度是变动的。我们用IHL(Internet Header Length)来记录头部的总长度，用Total Length记录整个IP包的长度。IPv6没有options，它的头部是固定的长度40 bytes，所以IPv6中并不需要IHL区域。Payload Length用来表示IPv6的数据部分的长度。整个IP包为40 bytes + Payload Length。
+    
+    IPv4中还有一个Checksum区域。这个checksum用于校验IP包的头部信息。IPv6则没有checksum区域。IPv6包的校验依赖高层的协议来完成
+    
+    Identification, flags和fragment offset，这三个包都是为碎片化服务的。碎片化是指一个路由器将接收到的IP包分拆成多个IP包传送，而接收这些“碎片”的路由器或者主机需要将“碎片”重新组合成一个IP包。不同的局域网所支持的最大传输单元(MTU, Maximum Transportation Unit)不同。如果一个IP包的大小超过了局域网支持的MTU，就需要在进入该局域网时碎片化传输。碎片化会给路由器和网络带来很大的负担。最好在IP包发出之前探测整个路径上的最小MTU，IP包的大小不超过该最小MTU，就可以避免碎片化。IPv6在设计上避免碎片化。每一个IPv6局域网的MTU都必须大于等于1280bytes。IPv6的默认发送IP包大小为1280bytes。
 
 3. ****IPv6新增区域****：
-  ****Flow Label**** 是IPv6中新增的区域。它被用来提醒路由器来重复使用之前的接力路径。这样IP包可以自动保持出发时的顺序。这对于流媒体之类的应用有帮助。Flow label的进一步使用还在开发中。IPv6中的Flow Label可以建议路由器将一些IP包保持一样的接力路径。但这只是“建议”，路由器可能会忽略该建议。
-  https://blog.csdn.net/u011784495/article/details/71693296
+    ****Flow Label**** 是IPv6中新增的区域。它被用来提醒路由器来重复使用之前的接力路径。这样IP包可以自动保持出发时的顺序。这对于流媒体之类的应用有帮助。Flow label的进一步使用还在开发中。IPv6中的Flow Label可以建议路由器将一些IP包保持一样的接力路径。但这只是“建议”，路由器可能会忽略该建议。
+  
 
 
 ##### 从宏观看IP帧，TCP/UDP帧，MAC地址，端口在数据通信过程中的作用：
