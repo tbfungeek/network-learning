@@ -824,7 +824,7 @@ _双冒号法_：
 
 - ****Next Header****：下一报文头，用来标识IPv6扩展报文头的信息；
 
-- ****Hop Limit****：跳数限制，与IPv4中的TTL类似；
+- ****Hop Limit****：跳数限制，与IPv4中的TTL类似,最大路由接力数；
 
 - ****Source Address****：源IP地址；
 
@@ -834,9 +834,45 @@ _双冒号法_：
 
 关于IPV4和IPV6的区别这里有一篇文章介绍得很详细推荐给大家看下：[IPV4和IPV6的区别有哪些](https://zhuanlan.zhihu.com/p/50747832?utm_source=wechat_session&utm_medium=social&utm_oi=37388499812352)
 
+1. ****IPV4 IPV6共有的区域****：
+
+- Version用来表明IP协议版本
+- Source Adrresss，Destination Address分别为发出地和目的地的IP地址。
+
+2. ****名字发生变动的区域****：
+
+- Time to Live --> Hop Limit in IPv6:
+- Type of Service --> Traffic Class in IPv6
+
+Type of Service最初是用来给IP包分优先级，比如语音通话需要实时性，所以它的IP包应该比Web服务的IP包有更高的优先级。然而，这个最初不错的想法没有被微软采纳。在Windows下生成的IP包都是相同的最高优先级，所以在当时造成Linux 和 Windows混合网络中，Linux的IP传输会慢于Windows (仅仅是因为Linux更加守规矩!)。后来，Type of Service被实际分为两部分：Differentiated Service Field (DS, 前6位)和Explicit Congestion Notification (ECN, 后2位)，前者依然用来区分服务类型，而后者用于表明IP包途径路由的交通状况。IPv6的Traffic Class也被如此分成两部分。通过IP包提供不同服务的想法，并针对服务进行不同的优化的想法已经产生很久了，但具体做法并没有形成公认的协议。比如ECN区域，它用来表示IP包经过路径的交通状况。如果接收者收到的ECN区域显示路径上的很拥挤，那么接收者应该作出调整。但在实际上，许多接收者都会忽视ECN所包含的信息。交通状况的控制往往由更高层的比如TCP协议实现。
+
+- Protocol 协议 --> Next Header in IPv6
+
+Protocol用来说明IP包Payload部分所遵循的协议，也就是IP包之上的协议是什么。它说明了IP包封装的是一个怎样的高层协议包(TCP 还是 UDP)。
+
+3. ****IPv6中删除的区域****：
+
+IPv4和IPv6的长度信息：
+
+IPv4头部的长度，不考虑options的话，整个IPv4头部有20 bytes，有options的存在，整个头部的总长度是变动的。我们用IHL(Internet Header Length)来记录头部的总长度，用Total Length记录整个IP包的长度。IPv6没有options，它的头部是固定的长度40 bytes，所以IPv6中并不需要IHL区域。Payload Length用来表示IPv6的数据部分的长度。整个IP包为40 bytes + Payload Length。
+
+IPv4中还有一个Checksum区域。这个checksum用于校验IP包的头部信息。IPv6则没有checksum区域。IPv6包的校验依赖高层的协议来完成。
+
+Identification, flags和fragment offset，这三个包都是为碎片化服务的。碎片化是指一个路由器将接收到的IP包分拆成多个IP包传送，而接收这些“碎片”的路由器或者主机需要将“碎片”重新组合成一个IP包。不同的局域网所支持的最大传输单元(MTU, Maximum Transportation Unit)不同。如果一个IP包的大小超过了局域网支持的MTU，就需要在进入该局域网时碎片化传输。碎片化会给路由器和网络带来很大的负担。最好在IP包发出之前探测整个路径上的最小MTU，IP包的大小不超过该最小MTU，就可以避免碎片化。IPv6在设计上避免碎片化。每一个IPv6局域网的MTU都必须大于等于1280bytes。IPv6的默认发送IP包大小为1280bytes。
+
+3. ****IPv6新增区域****：
+
+****Flow Label**** 是IPv6中新增的区域。它被用来提醒路由器来重复使用之前的接力路径。这样IP包可以自动保持出发时的顺序。这对于流媒体之类的应用有帮助。Flow label的进一步使用还在开发中。IPv6中的Flow Label可以建议路由器将一些IP包保持一样的接力路径。但这只是“建议”，路由器可能会忽略该建议。
+
 ##### 从宏观看IP帧，TCP/UDP帧，MAC地址，端口在数据通信过程中的作用：
 
 ##### 路由过程
+
+
+IP协议提供的传送只能是“我尽力”式的。所谓的“我尽力”，其潜台词是，如果事情出错不要怪我。所以，如果IP包传输过程中出现错误(比如checksum对不上，比如交通太繁忙，比如超过Time to Live)，根据IP协议，你的IP包会直接被丢掉。不会再有进一步的努力来修正错误。Best effort让IP协议保持很简单的形态。更多的质量控制交给高层协议处理，IP协议只负责有效率的传输。
+
+“效率优先”也体现在IP包的顺序(order)上。即使出发地和目的地保持不变，IP协议也不保证IP包到达的先后顺序。我们已经知道，IP接力是根据路由表决定接力路线的。如果在连续的IP包发送过程中，路由表更新(比如有一条新建的捷径出现)，那么后发出的IP包选择走不一样的接力路线。如果新的路径传输速度更快，那么后发出的IP包有可能先到。
+
 
 - ****推荐文章****
 
