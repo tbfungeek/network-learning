@@ -142,7 +142,7 @@ DNS服务器内部有一张表专门用来存储这些映射关系，那么这�
 
 ![](./images/how-data-is-processed-in-OSI-and-TCPIP-models.png)
 ![](./images/Internet_package.png)
-
+![](./images/Internet_package_1.png)
 
 #### 传输层协议 - 如何在两个应用直接可靠传输
 
