@@ -910,15 +910,19 @@ _双冒号法_：
 ****IPv4转IPV6的技术****
 
 - ****双协议栈技术****
+
 ![](./images/double_stack_ipv6.jpg)
 
 - ****隧道技术****
+
 ![](./images/tunk_ipv6.jpg)
 
 - ****网络协议转换技术****
+
 ![](./images/nat_ipv6.jpg)
 
 - ****IVI技术****
+
 ![](./images/ivi.jpg)
 
 网络运营商通过对一部分IPv4和IPv6地址进行映射，生成IVI专用地址。IPv6网络的用户如果想访问IPv4网络，可以通过IVI网关的映射表获得IPv4地址来直接访问IPv4网络。而IPv4用户如果需要访问IPv6网络，则会通过IVI网关获得IVI-6地址来访问IPv6网络。
