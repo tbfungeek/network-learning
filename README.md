@@ -927,7 +927,7 @@ _双冒号法_：
 
 网络运营商通过对一部分IPv4和IPv6地址进行映射，生成IVI专用地址。IPv6网络的用户如果想访问IPv4网络，可以通过IVI网关的映射表获得IPv4地址来直接访问IPv4网络。而IPv4用户如果需要访问IPv6网络，则会通过IVI网关获得IVI-6地址来访问IPv6网络。
 
-##### [路由过程](https://zhuanlan.zhihu.com/p/48700592?utm_source=wechat_session&utm_medium=social&utm_oi=37388499812352)
+##### 一次完整的数据包传输过程
 
 这里以一个简单案例来说明这个过程：
 
@@ -949,6 +949,8 @@ _双冒号法_：
 16. 传输层接收来自下层的Https请求TCP报文，则去掉TCP报头，向应用层传送。
 17. 应用层收到Https请求后，发送一个Https回应报文给PC1
 
+
+- [数据包在网络设备之间的传递流程-数据包走向问题](https://zhuanlan.zhihu.com/p/48700592?utm_source=wechat_session&utm_medium=social&utm_oi=37388499812352)
 - ****推荐文章****
 
 - [IP协议相关技术--图解TCP/IP](https://blog.csdn.net/sinat_37138973/article/details/72767558)
@@ -960,6 +962,8 @@ _双冒号法_：
 - [协议森林06 瑞士军刀 (ICMP协议)](https://www.cnblogs.com/vamei/archive/2012/12/05/2801991.html)
 - [DHCP协议原理及其实现流程](https://blog.csdn.net/wuruixn/article/details/8282554)
 - [IP 隧道技术：基础篇](https://blog.csdn.net/bat603/article/details/779842)
+- [详解一次完整的数据包传输过程 -- 层层递进](https://blog.csdn.net/u011563903/article/details/90116368?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase)
+- [数据包在网络设备之间的传递流程-数据包走向问题](https://blog.csdn.net/u011563903/article/details/90116368?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase)
 
 #### 应用层协议
 
