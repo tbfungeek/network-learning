@@ -1005,11 +1005,26 @@ _双冒号法_：
 
 ****HTTP 请求****
 
+- HTTP 请求结构:
+
+![](./images/Technology-ComputerNetworking-Internet-HTTP-Request.png)
+
+- HTTP 请求头字段介绍:
+  [鲜为人知的HTTP协议头字段详解大全「原创」](https://juejin.im/post/5ab341e06fb9a028c6759ce0)
+
 ****HTTP 响应****
 
-****HTTP 状态码****
+- HTTP 响应体结构:
+
+![](./images/Technology-ComputerNetworking-Internet-HTTP-Response.png)
+
+- HTTP 状态码:
+
+![](./images/http_response.jpg)
 
 ****HTTP 状态管理****
+
+![](./images/cookie_session.png)
 
 - ****HTTPS = HTTP + SSL/TLS****
 
@@ -1056,4 +1071,6 @@ _双冒号法_：
 - [「一道面试题」输入URL到渲染全面梳理下-总结篇](https://juejin.im/post/5ebabbf96fb9a043586c8f9e)
 - [HTTP 的前世今生：一次性搞懂 HTTP、HTTPS、SPDY、HTTP2](https://juejin.im/post/5be935f2e51d4570813b8cf0)
 - [Guidelines & Best Practices for Design RESTful API](https://bytenbit.com/best-guidelines-design-restful-api/)
+- [Technology-Computer Networking[2]-Application Layer](http://www.linyibin.cn/2017/02/14/technology-ComputerNetworking-ApplicationLayer/)
+- [鲜为人知的HTTP协议头字段详解大全「原创」](https://juejin.im/post/5ab341e06fb9a028c6759ce0)
 
