@@ -987,7 +987,8 @@ _双冒号法_：
 
 ##### HTTP、HTTPS、HTTP2, SPDY、QUIC
 
-- ****HTTP****
+
+##### HTTP
 
 ****HTTP 特点****
 
@@ -998,6 +999,9 @@ _双冒号法_：
 3. Http 请求是明文传输，是不安全的，它不提供Http请求，响应体加密功能，后续的Https 花了很大一部分精力在加强Http安全传输方面。
 
 ****HTTP 方法****
+
+![](./images/http_methods.png)
+![](./images/HTTP-method.png)
 
 ****HTTP 请求****
 
@@ -1051,4 +1055,5 @@ _双冒号法_：
 - [「一道面试题」输入URL到渲染全面梳理中-页面渲染篇](https://juejin.im/post/5e9f1db86fb9a03c85463560)
 - [「一道面试题」输入URL到渲染全面梳理下-总结篇](https://juejin.im/post/5ebabbf96fb9a043586c8f9e)
 - [HTTP 的前世今生：一次性搞懂 HTTP、HTTPS、SPDY、HTTP2](https://juejin.im/post/5be935f2e51d4570813b8cf0)
+- [Guidelines & Best Practices for Design RESTful API](https://bytenbit.com/best-guidelines-design-restful-api/)
 
