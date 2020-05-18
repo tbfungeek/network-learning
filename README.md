@@ -1073,4 +1073,6 @@ _双冒号法_：
 - [Guidelines & Best Practices for Design RESTful API](https://bytenbit.com/best-guidelines-design-restful-api/)
 - [Technology-Computer Networking[2]-Application Layer](http://www.linyibin.cn/2017/02/14/technology-ComputerNetworking-ApplicationLayer/)
 - [鲜为人知的HTTP协议头字段详解大全「原创」](https://juejin.im/post/5ab341e06fb9a028c6759ce0)
+- [详解cookie、session和HTTP缓存](https://juejin.im/post/5a7c6c415188257a780da590)
+- [图解 HTTP 缓存](https://juejin.im/post/5eb7f811f265da7bbc7cc5bd)
 
