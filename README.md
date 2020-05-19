@@ -1115,8 +1115,8 @@ HTTPS = HTTP + SSL/TLS
 这种方式安全了吗？其实还不安全，这里还会存在“中间人攻击”看下面情景：
 
 ![](./images/cheet_public_key.png)
-![](./images/cheet_public_key1.png)
-![](./images/cheet_public_key2.png)
+![](./images/cheet_public_key_1.png)
+![](./images/cheet_public_key_2.png)
 
 
 ****HTTPS连接建立过程****
