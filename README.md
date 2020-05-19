@@ -1044,6 +1044,7 @@ _双冒号法_：
   - 由于Cookie是明文保存在客户端的数据，可能会被客户端修改.
 
 - ****Session****:
+  
   Session是一种在服务器端保存数据的机制。服务器会将开辟一个Session并分配一个Session ID 与当前Session相关的数据会保存到与Session ID关联的服务器内存中，对应的Session ID 会通过前面介绍的Cookie保存到客户端，后续客户端通过Cookie机制来带上对应的Session ID.
 
   ****Session 的工作原理****:
