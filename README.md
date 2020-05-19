@@ -1062,13 +1062,13 @@ _双冒号法_：
   
 ![](./images/cookie_session.png)
 
-- ****HTTPS = HTTP + SSL/TLS****
+##### HTTPS = HTTP + SSL/TLS
 
-##### HTTPS如何保证通信的安全
+****HTTPS如何保证通信的安全****
 
-##### HTTPS连接建立过程
+****HTTPS连接建立过程****
 
-- ****HTTP2****
+##### HTTP2
 
 ****二进制传输****
 
@@ -1078,11 +1078,11 @@ _双冒号法_：
 
 ****服务端推送****
 
-- ****SPDY****
+##### SPDY
 
-- ****QUIC****
+##### QUIC
 
-- ****WebSocket****
+##### WebSocket
 
 ##### Nginx 负载均衡
 
