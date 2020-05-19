@@ -1112,7 +1112,11 @@ HTTPS = HTTP + SSL/TLS
 为进一步解决这个问题，在密钥传输上使用非对称加密，将公钥发布出去，别人用他的公钥加密，他用私钥解密这样就避免了对内容加密的密钥交换过程引入的密钥窃取问题。
 ![](./images/public_private_key.png)
 
+这种方式安全了吗？其实还不安全，这里还会存在“中间人攻击”看下面情景：
 
+![](./images/cheet_public_key.png)
+![](./images/cheet_public_key1.png)
+![](./images/cheet_public_key2.png)
 
 
 ****HTTPS连接建立过程****
