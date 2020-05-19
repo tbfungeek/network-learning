@@ -1039,14 +1039,14 @@ _双冒号法_：
   - 解析Cookie：Server 得到 Client 传递的 Cookie 之后，会解析 Cookie，然后使用Cookie中存的内容做对应的逻辑判断,比如判断是处于登陆状态等。
   
   ****Cookie 存在的问题****:
-  1. 只有在保存了Cookie的那个浏览器上能够使用该Cookie。同一设备不同浏览器之间，Cookie 不通用.
-  2. Cookie 的存储大小有限制： 最大可存4KB 左右。
-  3. 由于Cookie是明文保存在客户端的数据，可能会被客户端修改.
+  - 只有在保存了Cookie的那个浏览器上能够使用该Cookie。同一设备不同浏览器之间，Cookie 不通用.
+  - Cookie 的存储大小有限制： 最大可存4KB 左右。
+  - 由于Cookie是明文保存在客户端的数据，可能会被客户端修改.
 
 - ****Session****:
   Session是一种在服务器端保存数据的机制。服务器会将开辟一个Session并分配一个Session ID 与当前Session相关的数据会保存到与Session ID关联的服务器内存中，对应的Session ID 会通过前面介绍的Cookie保存到客户端，后续客户端通过Cookie机制来带上对应的Session ID.
 
-  ****Session 的工作原理 ****:
+  ****Session 的工作原理****:
 
   - 生成 SessionID：Client第一次访问Server，Server 生成一个随机数，命名为 SessionID，并将其放在响应头里，以Cookie 的形式返回给Client
   - 保存 SessionID：Server将要保存的数据保存在相对应的SessionID 之下，再将 SessionID 保存到服务器端的特定的保存Session 的内存中
