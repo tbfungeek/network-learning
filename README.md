@@ -1042,6 +1042,7 @@ _双冒号法_：
   - 只有在保存了Cookie的那个浏览器上能够使用该Cookie。同一设备不同浏览器之间，Cookie 不通用.
   - Cookie 的存储大小有限制： 最大可存4KB 左右。
   - 由于Cookie是明文保存在客户端的数据，可能会被客户端修改.
+  - 客户端可以禁用Cookie导致Cookie机制不生效.
 
 - ****Session****:
   
@@ -1051,7 +1052,7 @@ _双冒号法_：
 
   - 生成 SessionID：Client第一次访问Server，Server 生成一个随机数，命名为 SessionID，并将其放在响应头里，以Cookie 的形式返回给Client
   - 保存 SessionID：Server将要保存的数据保存在相对应的SessionID 之下，再将 SessionID 保存到服务器端的特定的保存Session 的内存中
-  - 使用 Session： Client 再次访问 Server的时候会通过Cookie将SessionID带上，服务端拿到SessionID 就会通过SessionID关联到内存上对应的保存该Session数据的内存中查找数据。
+  - 使用 Session： Client 再次访问 Server的时候会通过Cookie将SessionID带上（当然还可以通过URL参数带上），服务端拿到SessionID 就会通过SessionID关联到内存上对应的保存该Session数据的内存中查找数据。
 
 - ****Session 与 Cookie 的区别****:
   - Session 在服务器端，Cookie 在客户端。
