@@ -1064,11 +1064,10 @@ _双冒号法_：
 
 ##### HTTPS = HTTP + SSL/TLS
 
-前面介绍到HTTP是明文传输的，不安全的，HTTPS的推出很大一部分原因就是为了解决HTTP安全这方面问题。为了解决这个问题，增加了SSL/TLS，可以简单理解：
+SSL是 _Secure Sockets Layer_ (安全套接层) 的缩写。它是为了解决HTTP协议采用的是明文传输，存在很多比如传输内容会被窃取、篡改，身份会被冒充缺点这些问题而提出的。因为SSL 应用广泛，IETF 就把 SSL 标准化。标准化之后的名称改为 TLS _Transport Layer Security_(传输层安全协议)。这两者可以视作同一个东西的不同阶段。我们通常所说的 HTTPS 协议，其实就是就是"HTTP 协议"和"SSL/TLS 协议"的组合。可以理解为"HTTP over SSL"或"HTTP over TLS"。
 
-```
-HTTPS = HTTP + SSL/TLS
-```
+![](./images/https_tls_ssl.png)
+![](./images/https_struct.png)
 
 ****HTTPS如何保证通信的安全****
 
@@ -1132,13 +1131,16 @@ HTTPS = HTTP + SSL/TLS
 
 ![](./images/ca_6.png)
 
+
 ****HTTPS连接建立过程****
 
 ![](./images/SSLTLS_handshake.png)
 ![](./images/SSL-TLS-Shakehand.png)
 
 
-![](./images/https_struct.png)
+
+
+
 
 ##### HTTP2
 
