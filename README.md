@@ -1447,6 +1447,9 @@ HTTP 2.0最大的特点： 不会改动HTTP 的语义，HTTP 方法、状态码�
   
 ##### SPDY
 
+SPDY是HTTP2的前身，SPDY位于HTTP之下，TCP和SSL之上，这样可以轻松兼容老版本的HTTP协议同时可以使用已有的SSL功能，HTTP2 大部分协议都是基于SPDY进行的扩展，包括服务器端推送，多路复用和帧作为传输的最小单位。但SPDY与HTTP2 也有一些实现上的不同，比如 SPDY 的头部压缩使用的是DEFLATE算法，而HTTP2 使用的是HPACK算法，压缩率更高。
+
+
 ##### QUIC
 
 QUIC 是 Quick UDP Internet Connection 的简称，它是由Google提出的使用UDP进行多路并发传输的协议.
