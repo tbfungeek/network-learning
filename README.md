@@ -1349,9 +1349,33 @@ SSL/TLS 它主要依赖于三类基本算法：
 
 ##### HTTP2
 
+HTTP/2最大的特点是不改动原有HTTP的语义，HTTP 方法、状态码、URI 及首部字段，等核心概念的情况下提升整体性能。
+
 ****二进制传输****
 
-****Header 压缩****
+HTTP/1.1的头信息是ASCII编码的文本，body数据体可以是文本，也可以是二进制数据。而在HTTP/2中，新增了二进制分帧层，将所有数据打散为数个小片的二进制帧数据，以帧为单位在二进制分帧层中传输，协议看到的只是一个个的二进制碎片。而不再是Header+Body形式组织的数据。多个帧之间可以乱序发送，根据帧首部的流标识可以重新组装。
+
+![](./images/binary_frame.jpg)
+
+HTTP/2共定义了十种帧：
+
+- ****HEADERS****: 报头帧 (type=0x1)，用来打开一个流或者携带一个首部块片段
+- ****DATA****: 数据帧 (type=0x0)，装填主体信息，可以用一个或多个 DATA 帧来返回一个请求的响应主体
+- ****PRIORITY****: 优先级帧 (type=0x2)，指定发送者建议的流优先级，可以在任何流状态下发送PRIORITY 帧，包括空闲 (idle) 和关闭 (closed) 的流
+- ****RST_STREAM****: 流终止帧 (type=0x3)，用来请求取消一个流，或者表示发生了一个错误，payload 带有一个 32 位无符号整数的错误码 (Error Codes)，不能在处于空闲 (idle) 状态的流上发送 RST_STREAM 帧
+- ****SETTINGS****: 设置帧 (type=0x4)，设置此 连接 的参数，作用于整个连接
+- ****PUSH_PROMISE****: 推送帧 (type=0x5)，服务端推送，客户端可以返回一个 RST_STREAM 帧来选择拒绝推送的流
+- ****PING****: PING 帧 (type=0x6)，判断一个空闲的连接是否仍然可用，也可以测量最小往返时间 (RTT)
+- ****GOAWAY****: GOWAY 帧 (type=0x7)，用于发起关闭连接的请求，或者警示严重错误。GOAWAY 会停止接收新流，并且关闭连接前会处理完先前建立的流
+- ****WINDOW_UPDATE****: 窗口更新帧 (type=0x8)，用于执行流量控制功能，可以作用在单独某个流上 (指定具体 Stream Identifier) 也可以作用整个连接 (Stream Identifier 为 0x0)，只有 DATA 帧受流量控制影响。初始化流量窗口后，发送多少负载，流量窗口就减少多少，如果流量窗口不足就无法发送，WINDOW_UPDATE 帧可以增加流量窗口大小
+- ****CONTINUATION****: 延续帧 (type=0x9)，用于继续传送首部块片段序列
+
+深入理解可以看[HTTP/2 中的帧定义](https://halfrost.com/http2-http-frames-definitions/)这一篇文章。
+HTTP 2.0最大的特点： 不会改动HTTP 的语义，HTTP 方法、状态码、URI 及首部字段，等等这些核心概念上一如往常，却能致力于突破上一代标准的性能限制，改进传输性能，实现低延迟和高吞吐量。
+
+****首部压缩 HPACK算法****
+
+![](./images/hpack.png)
 
 ****多路复用****
 
@@ -1365,13 +1389,18 @@ QUIC 是 Quick UDP Internet Connection 的简称，它是由Google提出的使�
 
 ##### WebSocket
 
+
+
+
+
+
+
+
 ##### Nginx 负载均衡
 
 ##### CDN 内容分发网络
 
 #### 网络缓存技术
-
-##### 音视频相关协议
 
 #### 网站架构
 
@@ -1399,4 +1428,11 @@ QUIC 是 Quick UDP Internet Connection 的简称，它是由Google提出的使�
 - [图解 SSL/TLS 协议](https://neotan.github.io/ssl-tls/)
 - [SSL/TLS 握手过程详解](https://www.jianshu.com/p/7158568e4867)
 - [TLS 握手优化详解](https://imququ.com/post/optimize-tls-handshake.html)
-
+- [HTTP2 详解](https://juejin.im/post/5b88a4f56fb9a01a0b31a67e#heading-69)
+- [再谈HTTP2性能提升之背后原理—HTTP2历史解剖](https://juejin.im/post/5c4e6d11e51d4534dc477f05)
+- [解开 HTTP/2 的面纱：HTTP/2 是如何建立连接的](https://halfrost.com/http2_begin/)
+- [HTTP/2 幕后原理](https://www.ibm.com/developerworks/cn/web/wa-http2-under-the-hood/index.html)
+- [解密HTTP/2与HTTP/3 的新特性](https://juejin.im/post/5d9abde7e51d4578110dc77f)
+- [从理论到实践，全方位认识HTTP/2](https://juejin.im/post/5c09d0d66fb9a049dc020cc7)
+- [HTTP----HTTP2.0新特性](https://juejin.im/post/5a4dfb2ef265da43305ee2d0)
+- [Halfrost-Field HTTP](https://github.com/halfrost/Halfrost-Field/tree/master/contents/Protocol)
