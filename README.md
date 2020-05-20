@@ -1069,7 +1069,7 @@ SSL是 _Secure Sockets Layer_ (安全套接层) 的缩写。它是为了解决HT
 ![](./images/https_tls_ssl.png)
 ![](./images/https_struct.png)
 
-****HTTPS如何保证通信的安全****
+****HTTPS如何利用SSL/TLS保证通信的安全****
 
 这部分建议大家可以看下《我的一本算法书》第5章，结合图来理解会理解得比较深刻：
 
@@ -1111,6 +1111,10 @@ SSL是 _Secure Sockets Layer_ (安全套接层) 的缩写。它是为了解决HT
 为进一步解决这个问题，在密钥传输上使用非对称加密，将公钥发布出去，别人用他的公钥加密，他用私钥解密这样就避免了对内容加密的密钥交换过程引入的密钥窃取问题。
 ![](./images/public_private_key.png)
 
+这种就是所谓的混合加密方法：
+
+![](./images/hunhe.png)
+
 这种方式安全了吗？其实还不安全，这里还会存在“中间人攻击”看下面情景：
 
 ![](./images/cheet_public_key.png)
@@ -1131,15 +1135,28 @@ SSL是 _Secure Sockets Layer_ (安全套接层) 的缩写。它是为了解决HT
 
 ![](./images/ca_6.png)
 
+最终大致的结构如下所示：
 
-****HTTPS连接建立过程****
+![](./images/final_https_model.png)
+
+
+****SSL/TLS握手过程****
 
 ![](./images/SSLTLS_handshake.png)
 ![](./images/SSL-TLS-Shakehand.png)
 
+- ****Client_Hello****
+  客户端以明文的形式发起请求，请求中包含版本信息，加密套件候选列表，随机数，扩展字段等信息，说得白话一点就是：
+  这个阶段客户端会给服务器发送这样一条消息："我要建立一个安全的加密通道，这是我这边支持的套件列表，以及SSL/TLS版本"。
+  我们再具体看下所发送消息的内容部分：
+  ****支持的最高TSL协议版本version****，从低到高依次 SSLv2 SSLv3 TLSv1 TLSv1.1 TLSv1.2，当前基本不再使用低于TLSv1 的版本;
+  ****客户端支持的加密套件cipher suites 列表****，每个加密套件对应前面 TLS 原理中的四个功能的组合：认证算法 Au (身份验证)、密钥交换算法 KeyExchange(密钥协商)、对称加密算法 Enc (信息加密)和信息摘要 Mac(完整性校验);
 
+支持的压缩算法 compression methods 列表，用于后续的信息压缩传输;
 
+随机数 random_C，用于后续的密钥的生成;
 
+扩展字段 extensions，支持协议与算法的相关参数以及其它辅助信息等，常见的 SNI 就属于扩展字段，后续单独讨论该字段作用。
 
 
 ##### HTTP2
@@ -1187,4 +1204,5 @@ QUIC 是 Quick UDP Internet Connection 的简称，它是由Google提出的使�
 - [鲜为人知的HTTP协议头字段详解大全「原创」](https://juejin.im/post/5ab341e06fb9a028c6759ce0)
 - [详解cookie、session和HTTP缓存](https://juejin.im/post/5a7c6c415188257a780da590)
 - [图解 HTTP 缓存](https://juejin.im/post/5eb7f811f265da7bbc7cc5bd)
+- [HTTPS 详解一：附带最精美详尽的 HTTPS 原理图](https://segmentfault.com/a/1190000021494676)
 
