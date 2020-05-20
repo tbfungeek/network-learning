@@ -1064,7 +1064,7 @@ _双冒号法_：
 
 ##### HTTPS = HTTP + SSL/TLS
 
-SSL是 _Secure Sockets Layer_ (安全套接层) 的缩写。它是为了解决HTTP协议采用的是明文传输，存在很多比如传输内容会被窃取、篡改，身份会被冒充缺点这些问题而提出的。因为SSL 应用广泛，IETF 就把 SSL 标准化。标准化之后的名称改为 TLS _Transport Layer Security_(传输层安全协议)。这两者可以视作同一个东西的不同阶段。我们通常所说的 HTTPS 协议，其实就是就是"HTTP 协议"和"SSL/TLS 协议"的组合。可以理解为"HTTP over SSL"或"HTTP over TLS"。
+SSL/TLS和HTTP，HTTPS协议一样都是应用层协议，SSL是 _Secure Sockets Layer_ (安全套接层) 的缩写。它是为了解决HTTP协议采用的是明文传输，存在很多比如传输内容会被窃取、篡改，身份会被冒充缺点这些问题而提出的。因为SSL 应用广泛，IETF 就把 SSL 标准化。标准化之后的名称改为 TLS _Transport Layer Security_(传输层安全协议)。TLS 协议是从Netscape SSL 3.0协议演变而来的,这两者可以视作同一个东西的不同阶段。不过随着这两种协议不断发展后续逐渐出现了不兼容现象，目前SSL已经逐渐被TLS取代，所以大多数情况下说的安全层指的就是TLS。我们通常所说的 HTTPS 协议，其实就是就是"HTTP 协议"和"SSL/TLS 协议"的组合。可以理解为"HTTP over SSL"或"HTTP over TLS"。
 
 ![](./images/https_tls_ssl.png)
 ![](./images/https_struct.png)
@@ -1142,6 +1142,15 @@ SSL是 _Secure Sockets Layer_ (安全套接层) 的缩写。它是为了解决HT
 
 ****SSL/TLS握手过程****
 
+在SSL/TLS握手过程中，主要是为了完成如下的任务：
+
+- 确定双方通信所使用的的TLS版本
+- 客户端通过服务器的公钥和数字证书上的数字签名验证服务端的身份
+- 确定双方所要使用的密码组合
+- 生成会话密钥，该密钥将用于握手结束后的对称加密。
+
+握手过程如下：
+
 ![](./images/SSLTLS_handshake.png)
 ![](./images/SSL-TLS-Shakehand.png)
 
@@ -1150,13 +1159,21 @@ SSL是 _Secure Sockets Layer_ (安全套接层) 的缩写。它是为了解决HT
   这个阶段客户端会给服务器发送这样一条消息："我要建立一个安全的加密通道，这是我这边支持的套件列表，以及SSL/TLS版本"。
   我们再具体看下所发送消息的内容部分：
   ****支持的最高TSL协议版本version****，从低到高依次 SSLv2 SSLv3 TLSv1 TLSv1.1 TLSv1.2，当前基本不再使用低于TLSv1 的版本;
-  ****客户端支持的加密套件cipher suites 列表****，每个加密套件对应前面 TLS 原理中的四个功能的组合：认证算法 Au (身份验证)、密钥交换算法 KeyExchange(密钥协商)、对称加密算法 Enc (信息加密)和信息摘要 Mac(完整性校验);
+  ****客户端支持的加密套件列表****：每个加密套件对应TLS认证算法，密钥交换算法，对称加密算法，信息摘要四个功能的组合
+  ****支持的压缩算法列表****：用于后续的信息压缩传输;
+  ****随机数****：用于后续的密钥的生成;
 
-支持的压缩算法 compression methods 列表，用于后续的信息压缩传输;
+- ****Server_Hello/Server_Certificates/Server_Hello_Done****
+  这个阶段服务器会根据自己的实际情况，返回协商的信息结果，包括选择使用的协议版本version，选择的加密套件，选择的压缩算法 随机数 random_S等，其中随机数用于后续的密钥协商;
+  说得形象点就是服务端收到客户端发出的Client_Hello消息后，会作出如下回复："我看了你发的版本信息，加密套件信息，我确认了下我们可以使用TLSVxxx版本的协议，这是我的认证证书，里面包含了后续用于和我进行密钥交换的加密算法的公钥"
 
-随机数 random_C，用于后续的密钥的生成;
+- ****证书校验****
+  客户端收到从服务端发送过来的证书后会对证书的证书链的可信，证书是否吊销，有效期，域名等进行验证，只有验证通过才会进行后续通信，否则根据错误情况不同做出提示和操作。
 
-扩展字段 extensions，支持协议与算法的相关参数以及其它辅助信息等，常见的 SNI 就属于扩展字段，后续单独讨论该字段作用。
+- ****Client_Key_Exchange/Change_Cipher_Spec/Encrypted_Handshake_Message****
+
+
+
 
 
 ##### HTTP2
@@ -1205,4 +1222,10 @@ QUIC 是 Quick UDP Internet Connection 的简称，它是由Google提出的使�
 - [详解cookie、session和HTTP缓存](https://juejin.im/post/5a7c6c415188257a780da590)
 - [图解 HTTP 缓存](https://juejin.im/post/5eb7f811f265da7bbc7cc5bd)
 - [HTTPS 详解一：附带最精美详尽的 HTTPS 原理图](https://segmentfault.com/a/1190000021494676)
+- [HTTPS详解二：SSL / TLS 工作原理和详细握手过程](https://segmentfault.com/a/1190000021559557)
+- [HTTPS加密协议详解(四)：TLS/SSL握手过程](https://www.wosign.com/FAQ/faq2016-0309-04.htm)
+- [详解 HTTPS、TLS、SSL、HTTP区别和关系](https://www.wosign.com/Info/https_tls_ssl_http.htm)
+- [HTTPS原理探讨（一）](https://segmentfault.com/a/1190000016624341)
+- [Inspecting TLS/SSL](https://www.java2depth.com/2019/04/transport-layer-security-tls-and-secure.html)
+- [图解 SSL/TLS 协议](https://neotan.github.io/ssl-tls/)
 
