@@ -1307,10 +1307,12 @@ SSL/TLS和HTTP，HTTPS协议一样都是应用层协议，SSL是 _Secure Sockets
   服务端通过一条事件消息通知客户端后面再发送的消息都会使用前面协商出来的秘钥加密了。
 
 - ****Encrypted Handshake Message(Server)****
+
   这一步对应的是 Server Finish 消息，服务端也会将握手过程的消息生成摘要再用秘钥加密，这是服务端发出的第一条加密消息。客户端接收后会用秘钥解密，能解出来说明协商的秘钥是一致的。
   ![](./images/shake_2.jpg)
 
 - ****Application Data****
+
   双方已安全地协商出了同一份秘钥，所有的应用层数据都会用这个秘钥加密后再通过 TCP 进行可靠传输。
 
 ##### HTTP2
