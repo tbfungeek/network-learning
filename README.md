@@ -1160,7 +1160,21 @@ _双冒号法_：
 SSL/TLS和HTTP，HTTPS协议一样都是应用层协议，SSL是 _Secure Sockets Layer_ (安全套接层) 的缩写。它是为了解决HTTP协议采用的是明文传输，存在很多比如传输内容会被窃取、篡改，身份会被冒充缺点这些问题而提出的。因为SSL 应用广泛，IETF 就把 SSL 标准化。标准化之后的名称改为 TLS _Transport Layer Security_(传输层安全协议)。TLS 协议是从Netscape SSL 3.0协议演变而来的,这两者可以视作同一个东西的不同阶段。不过随着这两种协议不断发展后续逐渐出现了不兼容现象，目前SSL已经逐渐被TLS取代，所以大多数情况下说的安全层指的就是TLS。我们通常所说的 HTTPS 协议，其实就是就是"HTTP 协议"和"SSL/TLS 协议"的组合。可以理解为"HTTP over SSL"或"HTTP over TLS"。
 
 ![](./images/https_tls_ssl.png)
+
+****SSL/TLS原理****
+
+SSL/TLS 主要用于传输数据加密，数据完整性校验，对方身份校验。
+
 ![](./images/https_struct.png)
+
+SSL/TLS 它主要依赖于三类基本算法：
+
+- 散列函数Hash（MD5、SHA1、SHA256）:
+  函数单向不可逆、对输入非常敏感、输出长度固定，针对数据的任何修改都会改变散列函数的结果，用于防止信息篡改并验证数据的完整性。
+- 对称加密（AES-CBC、DES、3DES、AES-GCM）:相同的密钥可以用于信息的加密和解密，掌握密钥才能获取信息，能够防止信息窃听，在HTTPS中用于通信数据的加密
+- 非对称加密（RSA，ECC、DH）: 用于身份认证和密钥协商
+
+
 
 ****HTTPS如何利用SSL/TLS保证通信的安全****
 
