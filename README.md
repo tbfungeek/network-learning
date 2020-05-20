@@ -1313,17 +1313,6 @@ SSL/TLS和HTTP，HTTPS协议一样都是应用层协议，SSL是 _Secure Sockets
 - ****Application Data****
   双方已安全地协商出了同一份秘钥，所有的应用层数据都会用这个秘钥加密后再通过 TCP 进行可靠传输。
 
-
-  
-
-  
-
-
-
-
-
-
-
 ##### HTTP2
 
 ****二进制传输****
@@ -1374,4 +1363,6 @@ QUIC 是 Quick UDP Internet Connection 的简称，它是由Google提出的使�
 - [HTTPS原理探讨（一）](https://segmentfault.com/a/1190000016624341)
 - [Inspecting TLS/SSL](https://www.java2depth.com/2019/04/transport-layer-security-tls-and-secure.html)
 - [图解 SSL/TLS 协议](https://neotan.github.io/ssl-tls/)
+- [SSL/TLS 握手过程详解](https://www.jianshu.com/p/7158568e4867)
+- [TLS 握手优化详解](https://imququ.com/post/optimize-tls-handshake.html)
 
