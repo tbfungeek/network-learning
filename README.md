@@ -1288,9 +1288,34 @@ SSL/TLS和HTTP，HTTPS协议一样都是应用层协议，SSL是 _Secure Sockets
 
   
 - ****Client Key Exchange****
+
   上面客户端根据服务器传来的公钥生成了PreMaster Key，Client Key Exchange 就是将这个key传给服务端，服务端再用自己的私钥解出这个PreMaster Key 得到客户端生成的 Random3。至此，客户端和服务端都拥有 Random1 + Random2 + Random3，两边再根据同样的算法就可以生成一份秘钥，握手结束后的应用层数据都是使用这个秘钥进行对称加密。为什么要使用三个随机数呢？这是因为 SSL/TLS 握手过程的数据都是明文传输的，并且多个随机数种子来生成秘钥不容易被暴力破解出来。客户端将 PreMaster Key 传给服务端的过程如下图所示：
-  
+
   ![](./images/cert_exchange.jpg)
+
+- ****Change Cipher Spec(Client)****
+
+  客户端通过一条事件消息通知服务端后面再发送的消息都会使用前面协商出来的秘钥加密了。
+  ![](./images/client_chiper_change.jpg)
+  
+- ****Encrypted Handshake Message(Client)****
+
+  客户端将前面的握手消息生成摘要再用协商好的秘钥加密，这是客户端发出的第一条加密消息。服务端接收后会用秘钥解密，能解出来说明前面协商出来的秘钥是一致的。
+  ![](./images/shake_1.jpg)
+  
+- ****Change Cipher Spec(Server)****
+  服务端通过一条事件消息通知客户端后面再发送的消息都会使用前面协商出来的秘钥加密了。
+
+- ****Encrypted Handshake Message(Server)****
+  这一步对应的是 Server Finish 消息，服务端也会将握手过程的消息生成摘要再用秘钥加密，这是服务端发出的第一条加密消息。客户端接收后会用秘钥解密，能解出来说明协商的秘钥是一致的。
+  ![](./images/shake_2.jpg)
+
+- ****Application Data****
+  双方已安全地协商出了同一份秘钥，所有的应用层数据都会用这个秘钥加密后再通过 TCP 进行可靠传输。
+
+
+  
+
   
 
 
