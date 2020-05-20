@@ -1429,7 +1429,7 @@ HTTP 2.0最大的特点： 不会改动HTTP 的语义，HTTP 方法、状态码�
 服务端推送是指服务器可以对一个客户端请求发送多个响应。服务器向客户端推送资源无需客户端明确的请求。
 比较典型的例子，服务端根据客户端的请求，提前返回多个响应，推送额外的资源给客户端。如下图，客户端请求stream 1(/page.html)。服务端在返回stream 1的消息的同时推送了stream 2(/script.js)和stream 4(/style.css)
 
-![](./images/service_push.png)
+![](./images/serv_push.png)
 
 - 服务器推送工作原理：
 
