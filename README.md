@@ -1250,9 +1250,11 @@ SSL/TLS和HTTP，HTTPS协议一样都是应用层协议，SSL是 _Secure Sockets
 采用HTTPS协议的服务器必须要有一套数字证书，可以自己制作，也可以向组织申请。区别就是自己颁发的证书需要客户端验证通过，才可以继续访问，而使用受信任的公司申请的证书则不会弹出提示页面。
 
 - ****客户端发起HTTPS请求****
+
   用户在浏览器里输入一个HTTPS网址，然后连接到server的443端口.
 
 - ****Client_Hello****
+
   客户端以明文的形式发起请求，请求中包含版本信息，加密套件候选列表，随机数，扩展字段等信息，说得白话一点就是：
   这个阶段客户端会给服务器发送这样一条消息："我要建立一个安全的加密通道，这是我这边支持的套件列表，以及SSL/TLS版本"。
   我们再具体看下所发送消息的内容部分：
@@ -1262,19 +1264,36 @@ SSL/TLS和HTTP，HTTPS协议一样都是应用层协议，SSL是 _Secure Sockets
 
   ![](./images/client_hello.jpg)
 
-- ****Server_Hello/Server_Certificates/Server_Hello_Done****
+- ****Server_Hello****
+
   这个阶段服务器会根据自己的实际情况，返回协商的信息结果，包括选择使用的协议版本version，加密套件(这个套件决定了后续加密和生成摘要时具体使用哪些算法)，以及生成的随机数 Random2等，其中随机数用于后续的对称秘钥协商;
   说得形象点就是服务端收到客户端发出的Client_Hello消息后，会作出如下回复："我看了你发的版本信息，加密套件信息，我确认了下我们可以使用TLSVxxx版本的协议，这是我的认证证书，里面包含了后续用于和我进行密钥交换的加密算法的公钥"
 
   ![](./images/server_hello.jpg)
+
+- ****Certificate Request****
+
+  Certificate Request 是服务端要求客户端上报证书，这一步是可选的。
+
+- ****Server Hello Done****
+
+  通知客户端 Server Hello 过程结束。
+  ![](./images/serv_hello_done.jpg)
   
 - ****Certificate Verify****
+
   客户端收到从服务端发送过来的证书后验证证书链的可信性，证书是否吊销，有效期，域名等信息，只有验证通过才会进行后续通信，否则根据错误情况不同做出提示和操作。验证通过后取出证书中的服务端公钥，再生成一个随机数 Random3，再用服务端公钥非对称加密 Random3 生成 PreMaster Key。
-    
+
   ![](./images/client_cert.jpg)
 
   
-- ****Client_Key_Exchange/Change_Cipher_Spec/Encrypted_Handshake_Message****
+- ****Client Key Exchange****
+  上面客户端根据服务器传来的公钥生成了PreMaster Key，Client Key Exchange 就是将这个key传给服务端，服务端再用自己的私钥解出这个PreMaster Key 得到客户端生成的 Random3。至此，客户端和服务端都拥有 Random1 + Random2 + Random3，两边再根据同样的算法就可以生成一份秘钥，握手结束后的应用层数据都是使用这个秘钥进行对称加密。为什么要使用三个随机数呢？这是因为 SSL/TLS 握手过程的数据都是明文传输的，并且多个随机数种子来生成秘钥不容易被暴力破解出来。客户端将 PreMaster Key 传给服务端的过程如下图所示：
+  
+  ![](./images/cert_exchange.jpg)
+  
+
+
 
 
 
