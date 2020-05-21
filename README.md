@@ -1451,26 +1451,42 @@ SPDY是HTTP2的前身，SPDY位于HTTP之下，TCP和SSL之上，这样可以轻
 
 ##### QUIC/HTTP3
 
-QUIC 是 Quick UDP Internet Connection 的简称，它是由Google提出的使用UDP进行多路并发传输的协议.
+QUIC 是 Quick UDP Internet Connection 的简称，它是由Google提出的使用UDP进行多路并发传输的协议,它的目的是减少连接和传输延迟，并且提供与TLS/SSL相同的安全性，整个组成结构如下所示：
 
-##### 为什么需要 QUIC
+![](./images/1_E90CoPNTa24ekQ85LEyrgg.png)
+![](./images/v2-042349861ba29fc613bd2364bb3f3881_1440w.jpg)
 
-典型的基于TCP传输层的HTTP协议，在整个数据传输过程大致需要如下时间：
+##### QUIC的优势
 
+##### 解决队头阻塞问题
+
+队头阻塞存在于HTTP协议层和TCP协议层，HTTP2.0通过多路复用技术，解决了HTTP层面的队头阻塞问题，但是TCP层面的队头问题依然存在，这主要是TCP 协议的丢包重传导致的，因为一旦有了前后顺序，队头阻塞问题将不可避免。QUIC通过前向恢复技术，利用冗余数据包的形式通过已有数据进行错误恢复。但是这并不意味着完全不用重传技术，在某些非常重要的数据或者丢失两个包的情况还是需要借助重传机制来恢复。
+
+
+##### 借助TFO (TCP Fast Open) + Session Ticket 实现0-RTT的对话恢复
+
+![](./images/0rtt-graphic.png)
+
+在开始介绍介绍之前我们先看下不使用TFO + Session Ticket的情况下基于TCP传输层的HTTP协议整个数据传输过程大致需要的时间，时间以RTT作为度量（RTT表示客户端从发出一个请求数据，到接收到响应数据之间间隔的时间，一般情况下，一个RTT大约在几十毫秒左右，网络很好的情况下可以达到几毫秒，恶劣网络环境下达到几百毫秒）：
+
+```
 - 建立TCP虚拟通需要三次握手 => 需要 1.5 RTT
 - TLS: 客户端发送Client Hello消息 -> 服务端回复Server Hello消息 -> 客户端发送Key Exchange消息 => 需要 1.5 RTT
 - 在虚拟通道发出请求到收到服务器的HTTP Response => 需要 1 RTT
-
 所以这种情况下总时间为4RTT
 
 但是浏览器从服务端获取一个页面，通常会嵌入很多资源，这些资源往往需要重新建立一条连接，这里也需要4RTT,所以一般整个页面下来，至少需要8RTT,HTTPS2由于复用连接的使用可以减少1.5RTT + 1.5RTT共 3 RTT.所以这种情况下需要5 RTT.
+```
 
-这是由于传输层瓶颈导致的，所以需要有一个传输协议来替换TCP协议，所以就将目标放在了UDP协议，UDP不需要三次握手，不会带来附加的RTT时间，优化了连接建立的握手延迟，Google开发QUIC协议就是基于UDP传输协议，集成了TCP可靠传输机制、TLS安全加密、HTTP/2流量复用技术，理论上页面的加载时间为2.5 RTT时间。并且完成QUIC交易连接的Session ID会缓存在浏览器内存里,如果用户再次打开该页，无需建立TLS连接，直接使用缓存的Session ID 对应的加密参数，服务端可以根据Session ID在缓存里面查找对应的加密参数，来完成加密。QUIC协议是应用层面上的协议，只需要用户端和服务端的应用程序支持QUIC协议，并不依赖于操作系统和中间设备。
+这是由于传输层瓶颈导致的，所以需要有一个传输协议来替换TCP协议，所以就将目标放在了UDP协议，UDP不需要三次握手，不会带来附加的RTT时间，优化了连接建立的握手延迟。
 
-之所以避开操作系统和中间设备是因为由于TCP已经十分成熟，导致很多线上的中间设备，包括防火墙、NAT 网关，整流器等出现了一些约定俗成的动作，对这些内容的修改很容易遭到中间环节的干扰而失败。
-TCP是由操作系统在内核协议栈层面实现的，应用程序只能使用，不能直接修改。相对于通过操作系统升级来迭代TCP协议栈，显然应用程序的更新迭代更加快速便捷。
+接下来看下****Session Ticket****的工作原理：
 
-IETF为了让QUIC不仅可以运输HTTP，还可以运输其它协议。所以把QUIC与HTTP分离，同时QUIC标准集成了TLS 1.3版本，1.3版本更简练，建立TLS连接不再需要1.5 RTT，而只需要1 RTT。所以这部分又缩短了加载的时间。
+在使用Session Ticket的时候所有服务器预先设定相同的Ticket Key,而Session Ticket是服务器利用Ticket Key对Session Key进行加密再加上其他相关信息生成.每个Session Ticket都对应着相应的加密参数，服务端可以根据Session Ticket在缓存里面查找对应的加密参数，来完成加密。它的工作原理如下图所示：
+![](./images/session_ticket.jpg)
+
+那么TFO (TCP Fast Open)又是什么呢？我们知道正常情况下发送SYN时不能携带数据，TFO (TCP Fast Open)，是对TCP的拓展，不仅可以在发送SYN时携带数据，还可以保证安全性。QUICK就是通过TFO将先前的Session Ticket发送给服务端，服务端根据Session Ticket在缓存里面查找对应的加密参数，来完成后续加密。
+
 
 
 ##### WebSocket
