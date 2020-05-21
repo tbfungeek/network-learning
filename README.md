@@ -1453,7 +1453,7 @@ SPDY是HTTP2的前身，SPDY位于HTTP之下，TCP和SSL之上，这样可以轻
 
 QUIC 是 Quick UDP Internet Connection 的简称，它是由Google提出的使用UDP进行多路并发传输的协议.
 
-- 为什么需要 QUIC
+##### 为什么需要 QUIC
 
 典型的基于TCP传输层的HTTP协议，在整个数据传输过程大致需要如下时间：
 
