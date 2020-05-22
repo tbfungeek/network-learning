@@ -1535,10 +1535,91 @@ TCP 的 Timestamp 选项存在一个问题：发送方在发送报文时设置�
 
 ##### WebSocket
 
+****WebSocket Vs Https****
+
+WebSocket是与HTTP一样同是处于应用层的网络协议，它是一种在单个TCP连接上进行全双工通讯的协议，只要通过一次握手就可以跟WebSocket服务器建立全双工通信的连接，连接建立成功之后，客户端可以向服务器端发送数据，服务端也可以主动向客户端推送数据。它和HTTP相比它是持久的，双向的，只需要一次握手就可以建立连接。
+
+或许大家有个疑问前面介绍的HTTP2不是也介绍了服务端推送功能吗？HTTP1.1 的 keep-alive不是可以建立一个持久的连接吗？为什么还需要WebSocket。其实不是这样的HTTP的生命周期通过Request来界定，也就是一个Request 一个Response，一次HTTP请求就结束了。在HTTP1.1中进行了改进，增加了一个keep-alive，它的作用就是在一个HTTP连接中，可以发送多个Request，接收多个Response。达到复用连接的目的，但是不论哪种情况一个Request都对应Response，并且这个response也是被动的，不能主动发起。HTTP2的服务端推送也是由对应的请求后触发的。
+
+****其他方案****
+
+- 轮询
+
+轮询是在特定的的时间间隔（如每1秒），由浏览器对服务器发出HTTP请求，然后由服务器返回最新的数据给客户端。轮询的方式有一个轮询时间间隔的问题，间隔长了服务端的数据不能及时更新到客户端，间隔短了就会有许多无用的请求，增加服务器压力，浪费服务器以及带宽资源。同时HTTP请求可能包含较长的头部，其中真正有效的数据可能只是很小的一部分，同样会浪费很多的带宽等资源。
+
+- 长轮询 Long-Polling
+
+![](./images/long_poling.jpg)
+
+客户端发送一个超时时间很长的 Request，服务器 hold 住这个连接，在有新数据到达时返回Response，相比频繁轮询，占用的网络带宽少了。但是这种情况即使没有数据传输也占用着服务的连接。
+
+****建立WebSocket连接****
+
+WebSocket连接只需一次成功握手即可建立:
+
+![](./images/ws-shake-hand.png)
 
 
+客户端发出建立连接的请求：
 
+```
+GET /chat HTTP/1.1
+Host: server.example.com
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==
+Sec-WebSocket-Protocol: chat, superchat
+Sec-WebSocket-Version: 13
+Origin: http://example.com
+```
 
+上面的请求HTTP版本必须是1.1或更高，方法必须是GET。
+Connection: Upgrade表示这是一个协议升级包，需要升级到的协议用如下字段表示：
+```
+Upgrade: websocket
+```
+Sec-WebSocket-Version:表示要升级到的Websocket协议版本.
+Sec-WebSocket-Key是浏览器生成的一个Base64 encode的值，主要用于验证服务端的身份。
+
+服务端返回对应的响应报文：
+
+```
+HTTP/1.1 101 Switching Protocols
+Upgrade: websocket
+Connection: Upgrade
+Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=
+Sec-WebSocket-Protocol: chat
+```
+
+状态码为101，表示协议切换成功。
+Sec-WebSocket-Accept需要服务器通过客户端发送的Sec-WebSocket-Key计算出来。它把客户发送的 Sec-WebSocket-Key 和 "258EAFA5-E914-47DA-95CA-C5AB0DC85B11"连接起来，把结果用SHA-1编码，再用base64编码一次，就可以了。
+
+一旦服务器发送这个请求头，握手就完成了，WebSocket连接就建立起来了。后续就可以在这个连接上进行传输数据了。
+
+****数据传输****
+
+```
+Frame format:  
+​​
+      0                   1                   2                   3
+      0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+     +-+-+-+-+-------+-+-------------+-------------------------------+
+     |F|R|R|R| opcode|M| Payload len |    Extended payload length    |
+     |I|S|S|S|  (4)  |A|     (7)     |             (16/64)           |
+     |N|V|V|V|       |S|             |   (if payload len==126/127)   |
+     | |1|2|3|       |K|             |                               |
+     +-+-+-+-+-------+-+-------------+ - - - - - - - - - - - - - - - +
+     |     Extended payload length continued, if payload len == 127  |
+     + - - - - - - - - - - - - - - - +-------------------------------+
+     |                               |Masking-key, if MASK set to 1  |
+     +-------------------------------+-------------------------------+
+     | Masking-key (continued)       |          Payload Data         |
+     +-------------------------------- - - - - - - - - - - - - - - - +
+     :                     Payload Data continued ...                :
+     + - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - +
+     |                     Payload Data continued ...                |
+     +---------------------------------------------------------------+
+```
 
 
 
