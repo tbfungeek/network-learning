@@ -72,22 +72,6 @@ DNS服务器内部有一张表专门用来存储这些映射关系，那么这�
 
 ![](./images/search_ip.png)
 
-  - [DNS域名解析解剖](https://zhuanlan.zhihu.com/p/86504259)
-  - [DNS 原理入门](http://www.ruanyifeng.com/blog/2016/06/dns.html)
-  - [DNS入门：域名解析流程详解](https://zhuanlan.zhihu.com/p/38499577)
-  - [DNS 域名解析系统概述](https://blog.konghy.cn/2019/08/06/dns-overview/)
-  - [DNS简单总结](https://github.com/hellorocky/blog/blob/master/network/5.dns%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93.md)
-
-#### 推荐文章：
-
-- [当你在浏览器中输入了本站网址并回车后，产生了哪些技术步骤？](https://zhuanlan.zhihu.com/p/96505045)
-- [在浏览器输入 URL 回车之后发生了什么](https://wsgzao.github.io/post/url/)
-- [经典面试题：从 URL 输入到页面展现到底发生什么？](https://juejin.im/post/5c773dd251882519610194c1)
-- [史上最全！图解浏览器的工作原理](https://www.infoq.cn/article/CS9-WZQlNR5h05HHDo1b)
-- [图解浏览器的基本工作原理](https://zhuanlan.zhihu.com/p/47407398)
-- [浏览器的工作原理](https://github.com/creeperyang/blog/issues/46)
-- [深入浅出浏览器渲染原理](https://blog.fundebug.com/2019/01/03/understand-browser-rendering/)
-
 
 #### 分层网络结构
 
@@ -554,18 +538,6 @@ D-SACK使用了SACK的第一个段来做标志，
 如果SACK的第一个段的范围被SACK的第二个段覆盖，那么就是D-SACK
 ```
 
-- ****推荐文章****
-  - [TCP协议的滑动窗口具体是怎样控制流量的？](https://www.zhihu.com/question/32255109)
-  - [你还在为 TCP 重传、滑动窗口、流量控制、拥塞控制发愁吗？看完图解就不愁了](https://www.javashitang.com/?p=577)
-  - [TCP 的那些事儿（上）](https://coolshell.cn/articles/11564.html)
-  - [TCP 的那些事儿（下）](https://coolshell.cn/articles/11609.html)
-  - [这一次,让我们再深入一点 - TCP协议](https://juejin.im/post/5a49d95af265da430a50ed8c)
-  - [TCP 进阶](https://juejin.im/post/5a49d95af265da430a50ed8c)
-  - [TCP协议 读后感](https://www.todayios.com/impression-of-tcp-in-geekbang/)
-  - [一篇文章带你熟悉 TCP/IP 协议（网络协议篇二）](https://juejin.im/post/5a069b6d51882509e5432656)
-  - [一篇文章带你详解 HTTP 协议（网络协议篇一）](https://www.jianshu.com/p/6e9e4156ece3)
-  - [网络编程懒人入门](https://yq.aliyun.com/articles/670062?spm=a2c4e.11153940.0.0.72e87584UZ2aDo)
-  - 
 #### IP协议 - 如何找到最合适的路径将数据送到
 
 要标示一个应用和另一个应用的连接，会涉及到MAC地址，IP地址及端口。其中MAC地址具有设备唯一性，是物理地址，而IP地址是逻辑上的地址，一台机器有一个IP地址，但是一台主机上可能有多个应用所以，要标示某台机器上的某个应用就需要借助于端口，每个设备会为需要的应用分配单独的端口。接下来会重点从如下几个方面介绍IP协议相关的内容：
@@ -968,20 +940,6 @@ _双冒号法_：
 - ****路由器 - 网路层、数据链路层、物理层****
   与工作在数据链路层的交换机不同，路由器有更加复杂的功能。包括查询路由表，分包，地址转换等.
   当分组从一个端口进入到路由器之中时，首先在数据链路层检测MAC是否为这个端口的MAC地址，如果符合，那么就将IP数据报上交到网络层，根据路由表，查找应该 从哪一个端口发送出去。路由表就是由IP地址组成的对应关系的表，根据这个表可以查到通过哪个端口发送出去，就能够到达IP数据报的目的IP地址。
-
-- ****推荐文章****
-
-- [IP协议相关技术--图解TCP/IP](https://blog.csdn.net/sinat_37138973/article/details/72767558)
-- [IP地址](https://juejin.im/post/5c8e3e426fb9a070ab7e1a73)
-- [一文看懂IP地址：含义、分类、子网划分、查与改、路由器与IP地址](https://network.51cto.com/art/201911/605681.htm)
-- [网络编程懒人入门(十一)：一文读懂什么是IPv6](https://zhuanlan.zhihu.com/p/132411396)
-- [协议森林](https://www.cnblogs.com/vamei/archive/2012/12/05/2802811.html)
-- [ICMP协议详解](https://blog.csdn.net/baidu_37964071/article/details/80514340)
-- [协议森林06 瑞士军刀 (ICMP协议)](https://www.cnblogs.com/vamei/archive/2012/12/05/2801991.html)
-- [DHCP协议原理及其实现流程](https://blog.csdn.net/wuruixn/article/details/8282554)
-- [IP 隧道技术：基础篇](https://blog.csdn.net/bat603/article/details/779842)
-- [详解一次完整的数据包传输过程 -- 层层递进](https://blog.csdn.net/u011563903/article/details/90116368?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase)
-- [数据包在网络设备之间的传递流程-数据包走向问题](https://blog.csdn.net/u011563903/article/details/90116368?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase)
 
 #### 应用层协议
 
@@ -1972,16 +1930,40 @@ server {
 }
 ```
 
-[Nginx的几个应用场景](https://www.cnblogs.com/wmqiang/p/10565052.html)
-
-[Nginx应用场景](https://blog.csdn.net/vbirdbest/article/details/80913319)
-
-[Nginx通关攻略](https://juejin.im/post/5df721a3e51d45582c27c523)
-
-[Nginx源码笔记之流程分析](http://www.mikewootc.com/wiki/sw_develop/web/nginx_note_sourcecode_and_module_dev.html)
-
-
 #### CDN 内容分发网络
+
+- ****CDN是什么****
+
+CDN 是内容分发网络的简称，其目的是通过在源服务器和用户之间增加一层新的网络架构，将网站的内容分发到最接近用户的网络“边缘”，使用户可以就近取得所需的内容，提高用户访问网站的响应速度。
+
+- ****为什么需要CDN****
+
+  1. 加速网站的访问，提升用户体验。
+  我们之前提到要为了增加网站的访问速度，可以采用浏览器缓存等策略，但是浏览器缓存只是为了提升页面再次被访问的速度，而对于提升首次访问的响应能力，通常是采用CDN进行加速。可以毫不夸张得说互联网上的任何内容都可以通过CDN 加速。
+
+  2. 跨运营商，全网覆盖
+  为了实现跨运营商、跨地域的全网覆盖互联不互通、区域 ISP 地域局限、出口带宽受限制等种种因素都造成了网站的区域性无法访问。CDN 加速可以覆盖全球的线路，通过和运营商合作，部署IDC资源，在全国骨干节点商，合理部署CDN边缘分发存储节点，充分利用带宽资源，平衡源站流量。从而顺利实现跨运营商、跨地域的全网数据传输。
+
+  3. 大部分请求在边缘节点完成，CDN起到了分流作用，减少远程访问的带宽、分担网络流量、减轻原站点web服务器负载等功能，减轻了源站压力
+
+  4. 广泛分布的CDN节点加上节点之间的智能冗余机制，可以有效地预防黑客入侵。
+
+- ****CDN工作原理****
+
+![](./images/cdn.png)
+
+1. 当用户点击网站页面上的内容URL，经过本地DNS系统解析，DNS系统会最终将域名的解析权交给CNAME指向的CDN专用DNS服务器。
+2. CDN的DNS服务器将CDN的全局负载均衡设备IP地址返回用户。
+3. 用户向CDN的全局负载均衡设备发起内容URL访问请求。
+4. CDN全局负载均衡设备根据用户IP地址，以及用户请求的内容URL，选择一台用户所属区域的区域负载均衡设备，告诉用户向这台设备发起请求。区域负载均衡设备会为用户选择一台合适的缓存服务器提供服务，选择的依据包括：根据用户IP地址，判断哪一台服务器距用户最近；根据用户所请求的URL中携带的内容名称，判断哪一台服务器上有用户所需内容；查询各个服务器当前的负载情况，判断哪一台服务器尚有服务能力。基于以上这些条件的综合分析之后，区域负载均衡设备会向全局负载均衡设备返回一台缓存服务器的IP地址。
+5. 全局负载均衡设备把服务器的IP地址返回给用户。
+6. 用户向缓存服务器发起请求，缓存服务器响应用户请求，将用户所需内容传送到用户终端。如果这台缓存服务器上并没有用户想要的内容，而区域均衡设备依然将它分配给了用户，那么这台服务器就要向它的上一级缓存服务器请求内容，直至追溯到网站的源服务器将内容拉到本地。
+
+- ****CDN缓存策略****
+
+CDN边缘节点缓存策略因服务商不同而不同，但一般是通过http响应头中的Cache-control: max-age的字段来设置CDN边缘节点数据缓存时间。当客户端向CDN节点请求数据时，CDN节点会判断缓存数据是否过期，若缓存数据并没有过期，则直接将缓存数据返回给客户端；否则，CDN节点就会向源站发出回源请求，从源站拉取最新数据，更新本地缓存，并将最新数据返回给客户端。
+CDN缓存时间会对“回源率”产生直接的影响。若CDN缓存时间较短，CDN边缘节点上的数据会经常失效，导致频繁回源，增加了源站的负载，同时也增大的访问延时；若CDN缓存时间太长，会带来数据更新时间慢的问题。开发者需要对特定的业务，来做特定的数据缓存时间管理。 
+
 
 #### 网络缓存技术
 
@@ -2129,6 +2111,7 @@ Serverless 的优缺点:
 - 冷启动时间 函数运行时，执行容器和环境需要一个准备的时间，尤其是第一次启动时时间可能会较长。对一个 HTTP 请求来讲，可能会带来响应时延的增加，产生性能毛刺。
 - 调试与测试 由于本地环境和平台运行环境的差异性，开发者需要不断调整代码，打印日志，并提交到函数平台运行测试，会带来一些开发成本和产生一些费用。
 
+### 参考文档：
 
 - [十张图带你了解大型网站架构](https://blog.csdn.net/baidu_39511645/article/details/78345573)
 - [什么是微服务架构？](https://www.zhihu.com/question/65502802)
@@ -2166,3 +2149,47 @@ Serverless 的优缺点:
 - [写给前端工程师的 Serverless 入门](https://juejin.im/post/5d9c47dce51d4578045a3569)
 - [探索 Serverless 中的前端开发模式](https://juejin.im/post/5cdc3dc2e51d453b6c1d9d3a)
 - [Serverless 系列（一）：基本概念入门](https://www.infoq.cn/article/s101GtcCV05_2AgKo8GD)
+- [Nginx的几个应用场景](https://www.cnblogs.com/wmqiang/p/10565052.html)
+- [Nginx应用场景](https://blog.csdn.net/vbirdbest/article/details/80913319)
+- [Nginx通关攻略](https://juejin.im/post/5df721a3e51d45582c27c523)
+- [Nginx源码笔记之流程分析](http://www.mikewootc.com/wiki/sw_develop/web/nginx_note_sourcecode_and_module_dev.html)
+- [IP协议相关技术--图解TCP/IP](https://blog.csdn.net/sinat_37138973/article/details/72767558)
+- [IP地址](https://juejin.im/post/5c8e3e426fb9a070ab7e1a73)
+- [一文看懂IP地址：含义、分类、子网划分、查与改、路由器与IP地址](https://network.51cto.com/art/201911/605681.htm)
+- [网络编程懒人入门(十一)：一文读懂什么是IPv6](https://zhuanlan.zhihu.com/p/132411396)
+- [协议森林](https://www.cnblogs.com/vamei/archive/2012/12/05/2802811.html)
+- [ICMP协议详解](https://blog.csdn.net/baidu_37964071/article/details/80514340)
+- [协议森林06 瑞士军刀 (ICMP协议)](https://www.cnblogs.com/vamei/archive/2012/12/05/2801991.html)
+- [DHCP协议原理及其实现流程](https://blog.csdn.net/wuruixn/article/details/8282554)
+- [IP 隧道技术：基础篇](https://blog.csdn.net/bat603/article/details/779842)
+- [详解一次完整的数据包传输过程 -- 层层递进](https://blog.csdn.net/u011563903/article/details/90116368?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase)
+- [数据包在网络设备之间的传递流程-数据包走向问题](https://blog.csdn.net/u011563903/article/details/90116368?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase)
+- [DNS域名解析解剖](https://zhuanlan.zhihu.com/p/86504259)
+- [DNS 原理入门](http://www.ruanyifeng.com/blog/2016/06/dns.html)
+- [DNS入门：域名解析流程详解](https://zhuanlan.zhihu.com/p/38499577)
+- [DNS 域名解析系统概述](https://blog.konghy.cn/2019/08/06/dns-overview/)
+- [DNS简单总结](https://github.com/hellorocky/blog/blob/master/network/5.dns%E7%AE%80%E5%8D%95%E6%80%BB%E7%BB%93.md)
+- [当你在浏览器中输入了本站网址并回车后，产生了哪些技术步骤？](https://zhuanlan.zhihu.com/p/96505045)
+- [在浏览器输入 URL 回车之后发生了什么](https://wsgzao.github.io/post/url/)
+- [经典面试题：从 URL 输入到页面展现到底发生什么？](https://juejin.im/post/5c773dd251882519610194c1)
+- [史上最全！图解浏览器的工作原理](https://www.infoq.cn/article/CS9-WZQlNR5h05HHDo1b)
+- [图解浏览器的基本工作原理](https://zhuanlan.zhihu.com/p/47407398)
+- [浏览器的工作原理](https://github.com/creeperyang/blog/issues/46)
+- [深入浅出浏览器渲染原理](https://blog.fundebug.com/2019/01/03/understand-browser-rendering/)
+- [TCP协议的滑动窗口具体是怎样控制流量的？](https://www.zhihu.com/question/32255109)
+- [你还在为 TCP 重传、滑动窗口、流量控制、拥塞控制发愁吗？看完图解就不愁了](https://www.javashitang.com/?p=577)
+- [TCP 的那些事儿（上）](https://coolshell.cn/articles/11564.html)
+- [TCP 的那些事儿（下）](https://coolshell.cn/articles/11609.html)
+- [这一次,让我们再深入一点 - TCP协议](https://juejin.im/post/5a49d95af265da430a50ed8c)
+- [TCP 进阶](https://juejin.im/post/5a49d95af265da430a50ed8c)
+- [TCP协议 读后感](https://www.todayios.com/impression-of-tcp-in-geekbang/)
+- [一篇文章带你熟悉 TCP/IP 协议（网络协议篇二）](https://juejin.im/post/5a069b6d51882509e5432656)
+- [一篇文章带你详解 HTTP 协议（网络协议篇一）](https://www.jianshu.com/p/6e9e4156ece3)
+- [网络编程懒人入门](https://yq.aliyun.com/articles/670062?spm=a2c4e.11153940.0.0.72e87584UZ2aDo)
+
+
+## ONE MORE THINGS
+
+#### 5G
+#### 物联网iot
+#### 边缘计算
