@@ -1666,6 +1666,24 @@ Frame format:
 
 #### 网站架构
 
+#### 客户端渲染，服务端渲染
+
+- ****客户端渲染 CSR:****
+
+![](./images/csr.png)
+
+- ****服务端渲染 SSR:****
+
+![](./images/ssr.png)
+
+
+CSR首屏加载时间比较长，在CSR 的页面渲染流程中，首先要加载 HTML 文件，之后要下载页面所需的 JavaScript 文件，然后 JavaScript 文件渲染生成页面,所以在网络差的情况下这种情况第一次进去会有白屏现象。
+并且CSR项目的SEO(搜索引擎优化)能力极弱，在搜索引擎中基本上不可能有好的排名。因为目前大多数搜索引擎主要识别的内容还是HTML，对JavaScript文件内容的识别都还比较弱。如果一个项目的流量入口来自于搜索引擎，这个时候你使用 CSR进行开发，就非常不合适了。
+
+
+SSR的产生，主要就是为了解决上面所说的两个问题。在React中使用SSR技术，我们让React代码在服务器端先执行一次，使得用户下载的HTML已经包含了所有的页面展示内容，这样页面首屏加载时间得到一倍以上的缩减。
+并且由于从服务端下载下来的HTML中已经包含了网页的所有内容，所以SEO能力得到极大提高。之后，我们让React代码在客户端再次执行，为HTML网页中的内容添加数据及事件的绑定，页面就具备了 React 的各种交互能力。
+
 #### 跨域问题
 
 跨域是指一个域下的文档或脚本试图去请求另一个域下的资源，由于浏览器同源策略要求不允许从一个域上加载的脚本获取或操作另一个域上的文档属性。也就是不允许跨域的存在。那么同源中的源又是什么意思？ 这里的源由协议（protocal）、主机（host）和端口（port）组成。只有三者都一直才称为同源。
@@ -1998,3 +2016,4 @@ server {
 - [Halfrost-Field HTTP](https://github.com/halfrost/Halfrost-Field/tree/master/contents/Protocol)
 - [HTTP3详解](https://www.kancloud.cn/kancloud/http3-explained#/catalog)
 - [一文读懂 HTTP/1HTTP/2HTTP/3](https://zhuanlan.zhihu.com/p/102561034)
+- [React 中同构（SSR）原理脉络梳理](https://juejin.im/post/5bc7ea48e51d450e46289eab)
