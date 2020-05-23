@@ -1679,24 +1679,29 @@ Frame format:
 
 #### 前后端分离职责划分
 
-1、对于后端java工程师：（负责Model层，业务处理/数据等）
+1 对于后端java工程师：（负责Model层，业务处理/数据等）
 
+```
 把精力放在java基础，设计模式，jvm原理，spring+springmvc原理及源码，linux，mysql事务隔离与锁机制，mongodb，http/tcp，多线程，分布式架构，弹性计算架构，微服务架构，java性能优化，以及相关的项目管理等等。
 
 后端追求的是：三高（高并发，高可用，高性能），安全，存储，业务等等。
+```
 
-2、对于前端工程师：（负责View和Controller层。）
+2 对于前端工程师：（负责View和Controller层。）
 
+```
 把精力放在html5，css3，jquery，angularjs，bootstrap，reactjs，vuejs，webpack，less/sass，gulp，nodejs，Google V8引擎，javascript多线程，模块化，面向切面编程，设计模式，浏览器兼容性，性能优化等等。
 
 前端追求的是：页面表现，速度流畅，兼容性，用户体验等等。
-
+```
 
 #### 前后端分离架构图
 
 ![](./images/frond_end.jpg)
 ![](./images/front_end_divide.jpg)
 ![](./images/front_end.png)
+
+前端服务器使用nginx,
 
 #### 前后端分离优势
 
