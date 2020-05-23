@@ -1972,11 +1972,12 @@ server {
 }
 ```
 
-
-
 [Nginx的几个应用场景](https://www.cnblogs.com/wmqiang/p/10565052.html)
+
 [Nginx应用场景](https://blog.csdn.net/vbirdbest/article/details/80913319)
+
 [Nginx通关攻略](https://juejin.im/post/5df721a3e51d45582c27c523)
+
 [Nginx源码笔记之流程分析](http://www.mikewootc.com/wiki/sw_develop/web/nginx_note_sourcecode_and_module_dev.html)
 
 
@@ -1997,6 +1998,8 @@ server {
 - ****应用服务和数据服务分离****
 
 ![](./images/0002.png)
+
+随着访问数据量增加，单台服务器性能及存储空间不足，需要将应用和数据分离
 
 - ****应用服务和数据服务分离,针对不同服务选择不同特点的硬件设备****
 
@@ -2055,14 +2058,45 @@ server {
 
 ![](./images/0011.png)
 
+- ****微服务****
+
+****保佑这篇文章不要挂掉，后面好好整理下，先暂时放个链接：****
+[一文详解微服务架构](https://www.cnblogs.com/skabyy/p/11396571.html)
+
+- ****Serverless****
+
+Serverless 是指用户在使用对应的服务时，不需要关心服务器的硬件资源、软件资源、稳定性等等，这些通常已经由云计算厂商提供设施、服务和 SLA 保障，完全托管给云计算厂商。而用户只需要专注自己应用代码本身，上传执行函数到相应云计算平台，按照函数运行的时长按量付费即可.当前比较成熟的 Serverless 云产品主要有 Amazon Lambda(Amazon)、Google Cloud Function(、Google)、Azure Function(MicroSoft)、AliCloud Function Compute(Alibaba)
+
+下面是Serverless的结构图：
+
+![](./images/servless.png)
+
+最顶层的 Serverless 主要由 FaaS 和 BaaS 构成
+
+```
+Serverless = FaaS + BaaS
+```
+
+![](./images/fass_bass.png)
+
+****FaaS（Function-as-a-Service）**** 即为函数运行平台，用户无需搭建庞大的服务系统，只需要上传自己的逻辑函数如一些定时任务、数据处理任务等到云函数平台，配置执行条件触发器、路由等等，完成基础函数的注册。
+也就是说只要负责上传代码逻辑，并配置什么时候触发这段逻辑即可。
+
+****BaaS（Backend-as-a-Service）**** 包含了后端服务组件，它是基于 API 的第三方服务，用于实现应用程序中的核心功能，包含常用的数据库、对象存储、消息队列、日志服务等等。
+也就是一些公共的支持服务组成。
+
+Serverless 其实是通过事件驱动的，当一个任务被触发时，比如 HTTP 请求，API Gateway 接受请求、解析和认证，传递对应参数给云函数平台，平台中执行对应回调函数，配合 DB、MQ 等 BaaS 服务在特定容器中完成计算，最终将结果返回给用户。函数执行完成后，一般会被 FaaS 平台销毁，释放对应容器，等待下一个函数运行。
+
+![](./images/trigger_servless.png)
 
 
+下图是目前主流的Serverless解决方案对比：
 
-
-
+![](./images/servless_types.png)
 
 
 - [十张图带你了解大型网站架构](https://blog.csdn.net/baidu_39511645/article/details/78345573)
+- [什么是微服务架构？](https://www.zhihu.com/question/65502802)
 - [浏览器工作原理-webkit内核研究](https://juejin.im/entry/5a9a379af265da239d48c027)
 - [深入剖析 WebKit](https://ming1016.github.io/2017/10/11/deeply-analyse-webkit/)
 - [「一道面试题」输入URL到渲染全面梳理上-网络通信篇](https://juejin.im/post/5e9c48b2f265da47c558566b)
@@ -2094,3 +2128,5 @@ server {
 - [HTTP3详解](https://www.kancloud.cn/kancloud/http3-explained#/catalog)
 - [一文读懂 HTTP/1HTTP/2HTTP/3](https://zhuanlan.zhihu.com/p/102561034)
 - [React 中同构（SSR）原理脉络梳理](https://juejin.im/post/5bc7ea48e51d450e46289eab)
+- [写给前端工程师的 Serverless 入门](https://juejin.im/post/5d9c47dce51d4578045a3569)
+- [探索 Serverless 中的前端开发模式](https://juejin.im/post/5cdc3dc2e51d453b6c1d9d3a)
