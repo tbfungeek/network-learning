@@ -1712,12 +1712,173 @@ Nginx里有一个master进程和多个worker进程。master 进程并不处理�
 而woker进程主要用来处理基本的网络事件，多个worker进程之间是对等且相互独立的，一个请求，只可能在一个worker进程中处理，一个worker进程，不可能处理其它进程的请求。
 
 Nginx 之所以高效高性能是通过：
-- 基于异步及非阻塞的事件驱动模型，
+- 基于异步及非阻塞的事件驱动模型
 - 多进程机制 进程之间不共享资源，不需要加锁，减少了使用锁对性能造成的影响，可以让进程互相之间不会影响，如果一个进程发生异常退出时，其它进程正常工作
 - 使用内存池把多次向系统申请内存的操作整合成一次，大大减少了CPU资源的消耗，以及向操作系统申请内存的次数，同时减少了内存碎片。
 
-![Nginx通关攻略](https://juejin.im/post/5df721a3e51d45582c27c523)
-![Nginx源码笔记之流程分析](http://www.mikewootc.com/wiki/sw_develop/web/nginx_note_sourcecode_and_module_dev.html)
+****Nginx 应用场景****
+
+- 反向代理
+
+真实的服务器不直接被外部网络访问，所有的请求都需要经过反向代理，反向代理能被外部网络访问的同时又跟真实服务在同一个网络环境，当然也可能是同一台服务器，端口不同而已。Nginx反向代理通过****proxy_pass****指令来实现。
+
+简单的一个例子：当我们访问localhost的时候，就相当于访问 localhost:8081了
+
+```
+server {
+    listen       80;
+    server_name  localhost;
+
+    location / {
+        proxy_pass http://localhost:8081;
+        proxy_set_header Host $host:$server_port;
+        # 设置用户ip地址
+         proxy_set_header X-Forwarded-For $remote_addr;
+         # 当请求服务器出错去寻找其他服务器
+         proxy_next_upstream error timeout invalid_header http_500 http_502 http_503; 
+    }
+
+} 
+```
+
+- 负载均衡
+
+负载均衡指的是当有2台或以上服务器时根据规则随机的将请求分发到指定的服务器上处理，负载均衡配置一般都需要同时配置反向代理，通过反向代理跳转到负载均衡。而Nginx目前支持自带3种负载均衡策略，还有2种常用的第三方策略。负载均衡通过****upstream****指令来实现。
+
+```
+upstream web_servers {  
+   server localhost:8081;  
+   server localhost:8082;  
+}
+
+server {
+    listen       80;
+    server_name  localhost;
+    #access_log  logs/host.access.log  main;
+
+
+    location / {
+        proxy_pass http://web_servers;
+        # 必须指定Header Host
+        proxy_set_header Host $host:$server_port;
+    }
+ }
+
+```
+
+负载均衡策略：
+
+- ****RR轮询****
+
+每个请求按时间顺序逐一分配到不同的后端服务器，也就是说第一次请求分配到第一台服务器上，第二次请求分配到第二台服务器上，如果只有两台服务器，第三次请求继续分配到第一台上，这样循环轮询下去，也就是服务器接收请求的比例是 1:1， 如果后端服务器down掉，能自动剔除。轮询是默认配置，不需要太多的配置
+
+```
+upstream web_servers {  
+   server localhost:8081;  
+   server localhost:8082;  
+}
+```
+
+- ****权重****
+
+指定轮询几率，weight和访问比率成正比, 也就是服务器接收请求的比例就是各自配置的weight的比例，用于后端服务器性能不均的情况,比如服务器性能差点就少接收点请求，服务器性能好点就多处理点请求。
+
+```
+upstream test {
+    server localhost:8081 weight=1;
+    server localhost:8082 weight=3;
+    server localhost:8083 weight=4 backup;
+}
+```
+
+上面例子中如果4次请求只有一次被分配到8081上，其他3次分配到8082上。backup是指热备，只有当8081和8082都宕机的情况下才走8083
+
+- ****ip_hash****
+
+上面的2种方式都有一个问题，那就是下一个请求来的时候请求可能分发到另外一个服务器，当我们的程序不是无状态的时候(采用了session保存数据)，这时候就有一个很大的很问题了，比如把登录信息保存到了session中，那么跳转到另外一台服务器的时候就需要重新登录了，所以很多时候我们需要一个客户只访问一个服务器，那么就需要用iphash了，iphash的每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题。
+
+```
+upstream test {
+    ip_hash;
+    server localhost:8080;
+    server localhost:8081;
+}
+```
+
+- ****fair(第三方)****
+
+按后端服务器的响应时间来分配请求，响应时间短的优先分配。这个配置是为了更快的给用户响应
+
+```
+upstream backend {
+    fair;
+    server localhost:8080;
+    server localhost:8081;
+}
+```
+
+- ****url_hash(第三方)****
+
+按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存时比较有效。 在upstream中加入hash语句，server语句中不能写入weight等其他的参数，hash_method是使用的hash算法
+
+```
+upstream backend {
+    hash $request_uri;
+    hash_method crc32;
+    server localhost:8080;
+    server localhost:8081;
+}
+```
+
+- 动静分离
+
+动静分离是让动态网站里的动态网页根据一定规则把不变的资源和经常变的资源区分开来，动静资源做好了拆分以后，我们就可以根据静态资源的特点将其做缓存操作，这就是网站静态化处理的核心思路。
+
+使用静态服务器及反向代理2个功能，静态资源由Nginx本地提供，动态的资源反向代理到后端的Web容器提供,其中Web容器可以和Nginx在同一台服务器也可以在不同服务器上 。
+
+
+
+```
+upstream web_servers {  
+       server localhost:8081;  
+       server localhost:8082;  
+}
+
+server {
+    listen       80;
+    server_name  localhost;
+
+    set $doc_root /usr/local/var/www;
+
+    location ~* \.(gif|jpg|jpeg|png|bmp|ico|swf|css|js)$ {
+       root $doc_root/img;
+    }
+
+    location / {
+        proxy_pass http://web_servers;
+        # 必须指定Header Host
+        proxy_set_header Host $host:$server_port;
+    }
+
+    error_page 500 502 503 504  /50x.html;  
+    location = /50x.html {  
+        root $doc_root;
+    }
+
+ }
+```
+
+- HTTP服务器/静态服务器
+
+Nginx本身也是一个静态资源的服务器，当只有静态资源的时候，就可以使用Nginx来做服务器，如果一个网站只是静态页面的话，那么就可以通过这种方式来实现部署。在公司中经常会遇到静态服务器，通常会提供一个上传的功能，其他应用如果需要静态资源就从该静态服务器中获取。
+
+
+
+[NGINX的几个应用场景](https://www.cnblogs.com/wmqiang/p/10565052.html)
+[Nginx应用场景](https://blog.csdn.net/vbirdbest/article/details/80913319)
+[Nginx通关攻略](https://juejin.im/post/5df721a3e51d45582c27c523)
+[Nginx源码笔记之流程分析](http://www.mikewootc.com/wiki/sw_develop/web/nginx_note_sourcecode_and_module_dev.html)
+
 
 #### CDN 内容分发网络
 
