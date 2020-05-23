@@ -1666,6 +1666,44 @@ Frame format:
 
 #### 网站架构
 
+#### 跨域问题
+
+跨域是指一个域下的文档或脚本试图去请求另一个域下的资源，由于浏览器同源策略要求不允许从一个域上加载的脚本获取或操作另一个域上的文档属性。也就是不允许跨域的存在。那么同源中的源又是什么意思？ 这里的源由协议（protocal）、主机（host）和端口（port）组成。只有三者都一直才称为同源。
+
+#### 前后端分离
+
+#### 前后端分离开发流程
+
+![](./images/work_bench_front_end.jpeg)
+
+
+#### 前后端分离职责划分
+
+1、对于后端java工程师：（负责Model层，业务处理/数据等）
+
+把精力放在java基础，设计模式，jvm原理，spring+springmvc原理及源码，linux，mysql事务隔离与锁机制，mongodb，http/tcp，多线程，分布式架构，弹性计算架构，微服务架构，java性能优化，以及相关的项目管理等等。
+
+后端追求的是：三高（高并发，高可用，高性能），安全，存储，业务等等。
+
+2、对于前端工程师：（负责View和Controller层。）
+
+把精力放在html5，css3，jquery，angularjs，bootstrap，reactjs，vuejs，webpack，less/sass，gulp，nodejs，Google V8引擎，javascript多线程，模块化，面向切面编程，设计模式，浏览器兼容性，性能优化等等。
+
+前端追求的是：页面表现，速度流畅，兼容性，用户体验等等。
+
+
+#### 前后端分离架构图
+
+![](./images/frond_end.jpg)
+![](./images/front_end_divide.jpg)
+![](./images/front_end.png)
+
+#### 前后端分离优势
+
+
+[深入浅出：了解前后端分离优势、前后端接口联调以及优化问题](https://my.oschina.net/u/4405743/blog/3843221)
+
+
 #### Nginx 负载均衡
 
 ![](./images/proxy.jpg)
@@ -1872,6 +1910,33 @@ server {
 
 Nginx本身也是一个静态资源的服务器，当只有静态资源的时候，就可以使用Nginx来做服务器，如果一个网站只是静态页面的话，那么就可以通过这种方式来实现部署。在公司中经常会遇到静态服务器，通常会提供一个上传的功能，其他应用如果需要静态资源就从该静态服务器中获取。
 
+- 前后端分离中解决跨域问题
+
+```
+server {
+  listen 80;
+  server_name host.test;
+  root /data/project/;
+  index index.html index.php;
+
+  location ^~ /api {
+    root /data/project/service/web/;
+    fastcgi_pass 127.0.0.1:9000;
+    include fastcgi.conf;
+    fastcgi_param  SCRIPT_FILENAME /data/project/service/web/index.php;
+    fastcgi_param  SCRIPT_NAME     /api/index.php;
+    access_log logs/service-access.log;
+    error_log logs/service-error.log;
+  }
+
+  location ^~ / {
+    alias /data/project/web/dist/;
+    access_log logs/web-access.log;
+    error_log logs/web-error.log;
+  }
+}
+```
+
 
 
 [NGINX的几个应用场景](https://www.cnblogs.com/wmqiang/p/10565052.html)
@@ -1881,6 +1946,7 @@ Nginx本身也是一个静态资源的服务器，当只有静态资源的时候
 
 
 #### CDN 内容分发网络
+
 
 #### 网络缓存技术
 
