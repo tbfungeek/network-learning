@@ -1624,6 +1624,66 @@ Frame format:
 
 #### 浏览器原理
 
+不同浏览器有不同的实现细节，这里以Chrome 为例子进行介绍，Chrome 采用多进程架构，其顶层存在一个 Browser process 用以协调浏览器的其它进程。
+
+从大角度分可以分成如下几个重要的进程：
+
+![](./images/browser_01.png)
+![](./images/browser_02.png)
+
+****Browser Process：****
+
+负责包括地址栏，书签栏，前进后退按钮等部分的工作；
+负责处理浏览器的一些不可见的底层操作，比如网络请求和文件访问；
+
+****Renderer Process：****
+
+负责一个 tab 内关于网页呈现的所有事情
+
+****GPU Process:****
+
+负责处理 GPU 相关的任务
+
+****Plugin Process：****
+
+负责控制一个网页用到的所有插件，如 flash
+
+
+##### 导航过程发生了什么
+
+- 当用户在导航栏输入要访问的站点地址并点击回车键的时候，UI thread 通知 Network thread 获取网页内容，并控制 Tab 上的 Spinner 展现，表示正在加载中。Network thread 会执行 DNS 查询，随后为请求建立TLS连接。如果Network thread 接收到了重定向请求头如301，Network thread 会通知 UI thread 服务器要求重定向，之后，另外一个 URL 请求会被触发。
+
+![](./images/browser_03.png)
+
+- 收到服务器返回的响应:在服务器返回数据后Network thread将读取响应,判断响应内容的格式,如果响应内容的格式是HTML,下一步将会把这些数据传递给Renderer process，如果是zip 文件或者其它文件，会把相关数据传输给下载管理器。
+
+![](./images/browser_04.png)
+
+如果域名或者请求内容匹配到已知的恶意站点，Network thread 会展示一个警告页。此外 CORB 检测也会触发确保敏感数据不会被传递给渲染进程。
+
+![](./images/browser_05.png)
+
+
+- 当上述所有检查完成，Network thread 确信浏览器可以导航到请求网页，Network thread 会通知 UI thread 数据已经准备好，UI thread 会查找到一个 Renderer process 进行网页的渲染。收到 Network thread 返回的数据后，UI thread 查找相关的渲染进程
+由于网络请求获取响应需要时间，这里其实还存在着一个加速方案。当 UI thread 发送 URL 请求给Network thread 时，浏览器其实已经知道了将要导航到那个站点。UI thread 会并行的预先查找和启动一个渲染进程，如果一切正常，当 Network thread 接收到数据时，渲染进程已经准备就绪了，但是如果遇到重定向，准备好的渲染进程也许就不可用了，这时候就需要重启一个新的渲染进程。
+
+![](./images/browser_06.png)
+![](./images/browser_07.png)
+
+某些情况下同一个Tab下会存在跨站的iframe，这些iframe将使用单独的进程来渲染，这样会更为安全。
+
+![](./images/browser_08.png)
+
+
+
+
+
+
+
+  
+
+
+
 #### 客户端渲染，服务端渲染
 
 - ****客户端渲染 CSR:****
@@ -1695,7 +1755,6 @@ SSR的产生，主要就是为了解决上面所说的两个问题。在React中
 - 可以支持多端应用
 
 [深入浅出：了解前后端分离优势、前后端接口联调以及优化问题](https://my.oschina.net/u/4405743/blog/3843221)
-
 
 #### Nginx 负载均衡
 
