@@ -2114,12 +2114,14 @@ If-None-Match --> ETag
 
 ![](./images/http-cache-control.png)
 
+****ETag****:因为如果内容没有改变，Web服务器不需要发送完整的响应。而如果内容发生了变化，使用ETag有助于防止资源的同时更新相互覆盖（“空中碰撞”）。如果给定URL中的资源更改，则一定要生成新的Etag值。 因此Etags类似于指纹，也可能被某些服务器用于跟踪。 比较etags能快速确定此资源是否变化，但也可能被跟踪服务器永久存留。
+
 If-Modified-Since --> Last-Modified
 
 ![](./images/if-modify-since.png)
 
 
-更详细的内容可以查看MDN上的具体介绍：[MDN HTTP缓存介绍]https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Conditional_requests
+更详细的内容可以查看MDN上的具体介绍：[MDN HTTP缓存介绍](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Conditional_requests)
 
 - 如何废弃和更新缓存的响应：
 
@@ -2137,6 +2139,18 @@ If-Modified-Since --> Last-Modified
 - JavaScript 同样设置为 1 年后到期，但标记为 private，因为它包含的某些用户私人数据是CDN不应缓存的。
 - 图像缓存时不包含版本或唯一指纹，并设置为 1 天后到期。
 
+
+- 缓存策略的设计：
+
+```
+- 使用一致的网址：如果在不同的网址上提供相同的内容，将会多次提取和存储这些内容。
+- 确保服务器提供验证令牌 (ETag)：有了验证令牌，当服务器上的资源未发生变化时，就不需要传送相同的字节。
+- 确定中间缓存可以缓存哪些资源：对所有用户的响应完全相同的资源非常适合由CDN以及其他中间缓存进行缓存。
+- 为每个资源确定最佳缓存周期：不同的资源可能有不同的更新要求。为每个资源审核并确定合适的 max-age。
+- 确定最适合网站的缓存层次结构：可以通过为HTML文档组合使用包含内容指纹的资源网址和短时间或no-cache周期，来控制客户端获取更新的速度。
+- 最大限度减少搅动：某些资源的更新比其他资源频繁。 如果资源的特定部分（例如 JavaScript 函数或 CSS 样式集）会经常更新，可以考虑将其代码作为单独的文件提供。 这样一来，每次提取更新时，其余内容（例如变化不是很频繁的内容库代码）可以从缓存提取，从而最大限度减少下载的内容大小。
+
+```
 
 #### 常见Web攻击
 
