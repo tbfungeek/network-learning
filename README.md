@@ -980,10 +980,10 @@ _双冒号法_：
 | Accept-Language	| 浏览器可接受的语言	| Accept-Language: en,zh| 
 | Accept-Ranges	| 可以请求网页实体的一个或者多个子范围字段,如果存在Accept-Ranges标题，浏览器可能会尝试恢复中断的下载，而不是从头再次开始| Accept-Ranges: bytes| 
 | Authorization	| HTTP授权的授权证书	| Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==| 
-| Cache-Control	| 指定请求和响应遵循的缓存机制	Cache-Control: no-cache| 
+| Cache-Control	| 指定请求和响应遵循的缓存机制|	Cache-Control: no-cache| 
 | Connection	| 表示是否需要持久连接。（HTTP 1.1默认进行持久连接）| 	Connection: close| 
 | Cookie	| HTTP请求发送时，会把保存在该请求域名下的所有cookie值一起发送给web服务器。	| Cookie: $Version=1; Skin=new;| 
-| Content-Length	| 请求的内容长度	Content-Length: 348| 
+| Content-Length	| 请求的内容长度	|Content-Length: 348| 
 | Content-Type	| 请求的与实体对应的MIME信息	| Content-Type: application/x-www-form-urlencoded| 
 | Date	| 请求发送的日期和时间	| Date: Tue, 15 Nov 2010 08:12:31 GMT| 
 | From	| 发出请求的用户的Email	| From: user@email.com| 
@@ -1019,8 +1019,8 @@ _双冒号法_：
 | Allow	| 对某网络资源的有效的请求行为，不允许则返回405	| Allow: GET, HEAD| 
 | Cache-Control	| 告诉所有的缓存机制是否可以缓存及哪种类型	| Cache-Control: no-cache| 
 | Content-Encoding| 	web服务器支持的返回内容压缩编码类型。| 	Content-Encoding: gzip| 
-| Content-Language| 	响应体的语言	Content-Language: en,zh| 
-| Content-Length| 	响应体的长度	Content-Length: 348| 
+| Content-Language| 	响应体的语言|	Content-Language: en,zh| 
+| Content-Length| 	响应体的长度|	Content-Length: 348| 
 | Content-Location	| 请求资源可替代的备用的另一地址	| Content-Location: /index.htm| 
 | Content-MD5	| 返回资源的MD5校验值	| Content-MD5: Q2hlY2sgSW50ZWdyaXR5IQ==| 
 | Content-Range| 	在整个返回体中本部分的字节位置| 	Content-Range: bytes 21010-47021/47022| 
