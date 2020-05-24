@@ -969,94 +969,69 @@ _双冒号法_：
 
 ![](./images/Technology-ComputerNetworking-Internet-HTTP-Request.png)
 
-- HTTP 请求头字段介绍:
 
-  ****Accept****:
-  客户端期望服务器返回的媒体格式,客户端期望的资源类型服务器可能没有，所以客户端会期望多种类型，并且设置优先级，服务器根据优先级寻找相应的资源返回给客户端.
-  ```
-  Accept: audio/*; q=0.2, audio/basic
-  ```
-  先逗号分割类型，再分号分割属性，上面例子中用来表示优先级，q的取值范围是(0-1]，其具体值并没有意义，它仅用来排序优先级，如果没有q，默认q=1，也就是最高优先级。
+- HTTP 请求头结构:
 
-  ****Accept-Charset****:
-  表示客户端期望服务器返回的内容的编码格式。
-  ```
-  Accept-Charset: utf8, gbk; q=0.6
-  ```
-
-  ****Accept-Language****:
-  表示客户端期望服务器返回的内容的语言。
-  ```
-  Accept-Language:zh-CN,en-US;q=0.8,zh-TW;q=0.6
-  ```
-
-  ****Content-Type****:
-  Content-Type是****服务器向客户端发送的头****，代表内容的媒体类型和编码格式，是对Accept头和Accept-Charset头的统一应答。
-
-  ```
-  Content-Type: text/html; charset=utf8
-  ```
-
-  ****Content-Language****:
-  Content-Language是****服务器向客户端发送的头****，服务器通过此字段告知客户端返回的Body信息的语言，是对Accept-Language的统一应答。
-
-  ****Content-Length****:
-
-  表示传输的请求／响应的Body的长度。对于可以提前知道Body长度的请求／响应必须带上这个字段，以便对方可以方便的分辨出报文的边界，也就是Body数据何时结束。但是对于GET请求因为没有Body，所以不需要这个头。还有一种情况如果Body太大，需要边计算边传输，不到最后计算结束是无法知道整个Body大小的，这个时候可以使用http分块传输，这个时候也是不需要指定Content-Length字段。
-
-  ****Date****：
-  如果当前respone是及时生成的则Date就是响应的即时生成时间，如果是从缓存中获取的那么Date就是响应内容被缓存的时间。
-
-  ```
-  Date: Tue, 15 Nov 1994 08:12:31 GMT
-  ```
-
-  ****Last-Modified****：
-  标记资源的最近修改时间
-  
-  ****Age*****:
-  表示资源缓存的年龄，也就是资源自缓存以来到现在已经过去了多少时间，单位是秒。
-
-  ```
-  Age: 86400
-  ```
-
-  *****Expires****:
-
-  服务器使用Expires头来告知对方资源何时失效。如果它的值等于Date头的值，就表示资源已经失效。
-
-  ```
-  Expires: Thu, 01 Dec 1994 16:00:00 GMT
-  ```
-
-  ****Allow****:
-
-  表示资源支持访问的HTTP Method类型。它是服务器对客户端的建议，告知对方请使用Allow中提到的Method来访问资源。
-
-  ```
-  Allow: GET, HEAD, PUT
-  ```
-
-  ****Connection****:
-    当客户端和服务器需要协商连接的属性时，可以使用Connection头部
-    ```
-    Connection: close
-    ```
-
-  ****Expect****:
-  用于请求发送之前向服务器询问许可。譬如要向服务器发送一个很大的文件而不确定是否超出限制，就可以在请求头里携带一个Expect头部.如果服务器说不行，就会返回417 Expectation Failed错误告知客户端放弃。
-  
-  ****From****:
-  用来标记请求发起者的邮件地址，相当于给请求赋予一个责任人。如果服务器发现请求存在问题，就会通过此字段联系到发起人进行处理。因为邮件地址涉及到隐私信息，所以请求携带From头需要征得用户的同意。
-
-  ****Host****:
-  RFC协议规定所有的HTTP请求必须携带Host头
+| Header	| 解释  | 示例  |
+| ----	| ----  | ---- |
+| Accept	|指定客户端能够接收的内容类型|Accept: text/plain, text/html|
+| Accept-Charset | 浏览器可以接受的字符编码集。| 	Accept-Charset: iso-8859-5| 
+| Accept-Encoding	| 指定浏览器可以支持的web服务器返回内容压缩编码类型。| 	Accept-Encoding: compress, gzip| 
+| Accept-Language	| 浏览器可接受的语言	| Accept-Language: en,zh| 
+| Accept-Ranges	| 可以请求网页实体的一个或者多个子范围字段,如果存在Accept-Ranges标题，浏览器可能会尝试恢复中断的下载，而不是从头再次开始| Accept-Ranges: bytes| 
+| Authorization	| HTTP授权的授权证书	| Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==| 
+| Cache-Control	| 指定请求和响应遵循的缓存机制	Cache-Control: no-cache| 
+| Connection	| 表示是否需要持久连接。（HTTP 1.1默认进行持久连接）| 	Connection: close| 
+| Cookie	| HTTP请求发送时，会把保存在该请求域名下的所有cookie值一起发送给web服务器。	| Cookie: $Version=1; Skin=new;| 
+| Content-Length	| 请求的内容长度	Content-Length: 348| 
+| Content-Type	| 请求的与实体对应的MIME信息	| Content-Type: application/x-www-form-urlencoded| 
+| Date	| 请求发送的日期和时间	| Date: Tue, 15 Nov 2010 08:12:31 GMT| 
+| From	| 发出请求的用户的Email	| From: user@email.com| 
+| Host	| 指定请求的服务器的域名和端口号| 	Host: www.zcmhi.com| 
+| If-Match	| 只有请求内容与实体相匹配才有效	| If-Match: “737060cd8c284d8af7ad3082f209582d”| 
+| If-Modified-Since	| 如果请求的部分在指定时间之后被修改则请求成功，未被修改则返回304代码	| If-Modified-Since: Sat, 29 Oct 2010 19:43:31 GMT| 
+| If-None-Match	| 如果内容未改变返回304代码，参数为服务器先前发送的Etag，与服务器回应的Etag比较判断是否改变	| If-None-Match: “737060cd8c284d8af7ad3082f209582d”| 
+| If-Range	| 如果实体未改变，服务器发送客户端丢失的部分，否则发送整个实体。参数也为Etag| 	If-Range: “737060cd8c284d8af7ad3082f209582d”| 
+| If-Unmodified-Since	| 只在实体在指定时间之后未被修改才请求成功	| If-Unmodified-Since: Sat, 29 Oct 2010 19:43:31 GMT| 
+| Max-Forwards	| 限制信息通过代理和网关传送的时间| 	Max-Forwards: 10| 
+| Pragma	用来包含实现特定的指令| 	Pragma: no-cache| 
+| Proxy-Authorization	| 连接到代理的授权证书| 	Proxy-Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==| 
+| Range	| 只请求实体的一部分，指定范围| 	Range: bytes=500-999| 
+| Referer	| 先前网页的地址，当前请求网页紧随其后,即来路	| Referer: http://www.zcmhi.com/archives/71.html| 
+| Upgrade	向服务器指定某种传输协议以便服务器进行转换（如果支持）| 	Upgrade: HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11| 
+| User-Agent	| User-Agent的内容包含发出请求的用户信息	| User-Agent: Mozilla/5.0 (Linux; X11)| 
+| Via	| 通知中间网关或代理服务器地址，通信协议| 	Via: 1.0 fred, 1.1 nowhere.com (Apache/1.1)| 
+| Warning	关于消息实体的警告信息	| Warn: 199 Miscellaneous warning| 
   
 ****HTTP 响应****
 
 - HTTP 响应体结构:
 
 ![](./images/Technology-ComputerNetworking-Internet-HTTP-Response.png)
+
+
+- HTTP 响应头结构:
+  
+| Header	| 解释  | 示例  |
+| ----	| ----  | ---- |
+| Accept-Ranges	| 表明服务器是否支持指定范围请求及哪种类型的分段请求	| Accept-Ranges: bytes| 
+| Age	| 从原始服务器到代理缓存形成的估算时间（以秒计，非负）| 	Age: 12| 
+| Allow	| 对某网络资源的有效的请求行为，不允许则返回405	| Allow: GET, HEAD| 
+| Cache-Control	| 告诉所有的缓存机制是否可以缓存及哪种类型	| Cache-Control: no-cache| 
+| Content-Encoding| 	web服务器支持的返回内容压缩编码类型。| 	Content-Encoding: gzip| 
+| Content-Language| 	响应体的语言	Content-Language: en,zh| 
+| Content-Length| 	响应体的长度	Content-Length: 348| 
+| Content-Location	| 请求资源可替代的备用的另一地址	| Content-Location: /index.htm| 
+| Content-MD5	| 返回资源的MD5校验值	| Content-MD5: Q2hlY2sgSW50ZWdyaXR5IQ==| 
+| Content-Range| 	在整个返回体中本部分的字节位置| 	Content-Range: bytes 21010-47021/47022| 
+| Content-Type| 	返回内容的MIME类型	| Content-Type: text/html; charset=utf-8| 
+| Date| 	原始服务器消息发出的时间| 	Date: Tue, 15 Nov 2010 08:12:31 GMT| 
+| ETag	| 请求变量的实体标签的当前值	| ETag: “737060cd8c284d8af7ad3082f209582d”| 
+| Expires	| 响应过期的日期和时间	| Expires: Thu, 01 Dec 2010 16:00:00 GMT| 
+| Last-Modified	| 请求资源的最后修改时间| 	Last-Modified: Tue, 15 Nov 2010 12:45:26 GMT| 
+| Location	| 用来重定向接收方到非请求URL的位置来完成请求或标识新的资源	| Location: http://www.zcmhi.com/archives/94.html| 
+| Pragma	| 包括实现特定的指令，它可应用到响应链上的任何接收方	| Pragma: no-cache| 
+| Proxy-Authenticate	| 它指出认证方案和可应用到代理的该URL上的参数	| Proxy-Authenticate: Basic| 
 
 - HTTP 状态码:
 
@@ -2249,6 +2224,8 @@ CSRF即跨站请求伪造，是一种常见的Web攻击，攻击者盗用了你�
 2. 网站对于某些支付等敏感操作，增加确认，验证操作
 3. 使用Anti CSRF Token：目前比较完善的解决方案是加入Anti-CSRF-Token。即发送请求时在HTTP请求中以参数的形式加入一个随机产生的token，并在服务器建立一个拦截器来验证这个token。服务器读取浏览器当前域cookie中这个token值，会进行校验该请求当中的token和cookie当中的token值是否都存在且相等，才认为这是合法的请求。否则认为这次请求是违法的，拒绝该次服务。token可以在用户登陆后产生并放于session或cookie中，然后在每次请求时服务器把token从session或cookie中拿出，与本次请求中的token 进行比对。由于token的存在，攻击者无法再构造出一个完整的URL实施CSRF攻击。但在处理多个页面共存问题时，当某个页面消耗掉token后，其他页面的表单保存的还是被消耗掉的那个token，其他页面的表单提交时会出现token错误。
 
+
+
 - ****SQL注入****:
 
 攻击者利用SQL注入漏洞，可以访问或修改数据，或者利用潜在的数据库漏洞进行攻击。
@@ -2534,3 +2511,4 @@ Serverless 的优缺点:
 - [XSS](http://static.kancloud.cn/jonjo/jonjo/1025573)
 - [常见六大Web安全攻防解析](https://juejin.im/post/5c446eb1e51d45517624f7db)
 - [浅谈CSRF攻击方式](https://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html)
+- [Cheat Sheets](https://kapeli.com/cheatsheets)
