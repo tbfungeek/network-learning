@@ -979,7 +979,7 @@ _双冒号法_：
 | Accept-Encoding	| 指定浏览器可以支持的web服务器返回内容压缩编码类型。| 	Accept-Encoding: compress, gzip| 
 | Accept-Language	| 浏览器可接受的语言	| Accept-Language: en,zh| 
 | Accept-Ranges	| 可以请求网页实体的一个或者多个子范围字段,如果存在Accept-Ranges标题，浏览器可能会尝试恢复中断的下载，而不是从头再次开始| Accept-Ranges: bytes| 
-| Authorization	| HTTP授权的授权证书	| Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==| 
+| Authorization	| 用于HTTP协议的认证的认证信息	| Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==| 
 | Cache-Control	| 指定请求和响应遵循的缓存机制|	Cache-Control: no-cache| 
 | Connection	| 表示是否需要持久连接。（HTTP 1.1默认进行持久连接）| 	Connection: close| 
 | Cookie	| HTTP请求发送时，会把保存在该请求域名下的所有cookie值一起发送给web服务器。	| Cookie: $Version=1; Skin=new;| 
@@ -993,7 +993,8 @@ _双冒号法_：
 | If-None-Match	| 如果内容未改变返回304代码，参数为服务器先前发送的Etag，与服务器回应的Etag比较判断是否改变	| If-None-Match: “737060cd8c284d8af7ad3082f209582d”| 
 | If-Range	| 如果实体未改变，服务器发送客户端丢失的部分，否则发送整个实体。参数也为Etag| 	If-Range: “737060cd8c284d8af7ad3082f209582d”| 
 | If-Unmodified-Since	| 只在实体在指定时间之后未被修改才请求成功	| If-Unmodified-Since: Sat, 29 Oct 2010 19:43:31 GMT| 
-| Max-Forwards	| 限制信息通过代理和网关传送的时间| 	Max-Forwards: 10| 
+| Max-Forwards	| 限制该消息可被代理及网关转发的次数。| 	Max-Forwards: 10| 
+| Origin|发起一个针对 跨来源资源共享 的请求（要求服务器在回应中加入一个‘访问控制-允许来源’（'Access-Control-Allow-Origin'）字段）|Origin: http://www.example-social-network.com|
 | Pragma	用来包含实现特定的指令| 	Pragma: no-cache| 
 | Proxy-Authorization	| 连接到代理的授权证书| 	Proxy-Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==| 
 | Range	| 只请求实体的一部分，指定范围| 	Range: bytes=500-999| 
@@ -1014,8 +1015,9 @@ _双冒号法_：
   
 | Header	| 解释  | 示例  |
 | ----	| ----  | ---- |
+| Access-Control-Allow-Origin|指定哪些网站可参与到跨来源资源共享过程中|Access-Control-Allow-Origin: *|
 | Accept-Ranges	| 表明服务器是否支持指定范围请求及哪种类型的分段请求	| Accept-Ranges: bytes| 
-| Age	| 从原始服务器到代理缓存形成的估算时间（以秒计，非负）| 	Age: 12| 
+| Age	| 这个对象在代理缓存中存在的时间，以秒为单位| 	Age: 12| 
 | Allow	| 对某网络资源的有效的请求行为，不允许则返回405	| Allow: GET, HEAD| 
 | Cache-Control	| 告诉所有的缓存机制是否可以缓存及哪种类型	| Cache-Control: no-cache| 
 | Content-Encoding| 	web服务器支持的返回内容压缩编码类型。| 	Content-Encoding: gzip| 
@@ -1032,6 +1034,17 @@ _双冒号法_：
 | Location	| 用来重定向接收方到非请求URL的位置来完成请求或标识新的资源	| Location: http://www.zcmhi.com/archives/94.html| 
 | Pragma	| 包括实现特定的指令，它可应用到响应链上的任何接收方	| Pragma: no-cache| 
 | Proxy-Authenticate	| 它指出认证方案和可应用到代理的该URL上的参数	| Proxy-Authenticate: Basic| 
+| Retry-After|如果某个实体临时不可用，则此协议头用来告知客户端日后重试。其值可以是一个特定的时间段(以秒为单位)或一个超文本传输协议日期。|Example 2: Retry-After: Fri, 07 Nov 2014 23:59:59 GMT|
+| Server |服务器的名字|Server: Apache/2.4.1 (Unix)|
+| Set-Cookie|	HTTP cookie| Set-Cookie: UserID=JohnDoe; Max-Age=3600; Version=1|
+| Status| 通用网关接口 协议头字段，用来说明当前这个超文本传输协议回应的状态|Status: 200 OK|
+| Trailer	| 这个头部数值指示了在这一系列头部信息由由分块传输编码编码。| 	Trailer: Max-Forwards	| 
+| Transfer-Encoding	| 用来将实体安全地传输给用户的编码形式。当前定义的方法包括：分块（chunked）、compress、deflate、gzip和identity。| 	Transfer-Encoding: chunked	| 
+| Upgrade	| 要求客户端升级到另一个协议。	| Upgrade: HTTP/2.0, SHTTP/1.3, IRC/6.9, RTA/x11	| 
+| Vary	| 告知下游的代理服务器，应当如何对未来的请求协议头进行匹配，以决定是否可使用已缓存的回应内容而不是重新从原始服务器请求新的内容。| 	Vary: *	| 
+| Via	| 告知代理服务器的客户端，当前回应是通过什么途径发送的。| 	Via: 1.0 fred, 1.1 example.com (Apache/1.1)| 
+| Warning| 	一般性的警告，告知在实体内容体中可能存在错误。| 	Warning: 199 Miscellaneous warning| 
+| WWW-Authenticate| 	表明在请求获取这个实体时应当使用的认证模式。| 	WWW-Authenticate: Basic| 
 
 - HTTP 状态码:
 
